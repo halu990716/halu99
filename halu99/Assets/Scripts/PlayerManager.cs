@@ -25,7 +25,7 @@ public class PlayerManager : MonoBehaviour
     private int Player_List;
 
     // ** 플레이어의 부모 개체
-    private GameObject Parent;
+    //private GameObject Parent;
 
     private GameObject prefab;
 
@@ -44,7 +44,7 @@ public class PlayerManager : MonoBehaviour
 ;
 
             // ** 생성되는 Player를 담아둘 상위 객체
-            Parent = new GameObject("PlayerParent");
+            //Parent = new GameObject("PlayerParent");
 
             switch (Player_List)
             {
@@ -87,7 +87,7 @@ public class PlayerManager : MonoBehaviour
         Obj.transform.name = "Player";
 
         // ** 클론의 계층구조 설정.
-        Obj.transform.parent = Parent.transform;
+        //Obj.transform.parent = Parent.transform;
     }
 
     private void Update()

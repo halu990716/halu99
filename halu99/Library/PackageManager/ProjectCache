@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638155622949839588
-    m_Hash: 3261501255
+      ticks: 638156449166396940
+    m_Hash: 1876768381
   m_LockFileStatus:
     m_FilePath: C:/Users/SGA/Desktop/halu99/halu99/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638155622949899589
-    m_Hash: 4016386064
+      ticks: 638156449166405767
+    m_Hash: 3852363311
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
