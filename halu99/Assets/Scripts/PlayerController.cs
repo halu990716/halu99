@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Device;
+using static UnityEditor.PlayerSettings;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,6 +19,8 @@ public class PlayerController : MonoBehaviour
 
     private float AttackSpeed;
 
+    private float minX, maxX, minY, maxY;
+
     [HideInInspector] public int HP;
 
     private bool onAttack; // 공격상태
@@ -23,20 +28,12 @@ public class PlayerController : MonoBehaviour
     // 움직임을 저장하는 벡터
     private Vector3 Movement;
 
+
     // 플레이어의 SpriteRenderer 구성요소를 받아오기 위해...
     private SpriteRenderer playerRenderer;
 
     // 복사할 미사일 원본
     private GameObject MissilePrefab;
-
-    // 복제할 이펙트
-    private GameObject fxPrefab;
-
-    // 복사할 백그라운드 원본
-    private GameObject backGround;
-
-    // 복제된 백그라운드의 저장공간.
-    public List<GameObject> stageBack = new List<GameObject>();
 
     // 복제된 총알의 저장공간.
     private List<GameObject> Missile = new List<GameObject>();
@@ -84,11 +81,18 @@ public class PlayerController : MonoBehaviour
 
         // ** 초기값 셋팅
         onAttack = false;
+
+        minX = -Camera.main.orthographicSize * Camera.main.aspect - 5.0f;
+        maxX = Camera.main.orthographicSize * Camera.main.aspect + 5.0f;
+        minY = -Camera.main.orthographicSize - 2.0f;
+        maxY = Camera.main.orthographicSize + 3.0f;
     }
 
     void Update()
     {
         HP = ControllerManager.GetInstance().Player_HP;
+
+
 
         // **  Input.GetAxis =     -1 ~ 1 사이의 값을 반환함. 
         float Hor = Input.GetAxisRaw("Horizontal"); // -1 or 0 or 1 셋중에 하나를 반환.
@@ -107,6 +111,13 @@ public class PlayerController : MonoBehaviour
             onAttack = true;
             StartCoroutine(OnAttack());
         }
+    }
+
+    void LateUpdate()
+    {
+        transform.position = new Vector3(
+            Mathf.Clamp(transform.position.x, minX, maxX),
+            Mathf.Clamp(transform.position.y, minY, maxY));
     }
 
     IEnumerator OnAttack()
@@ -130,4 +141,5 @@ public class PlayerController : MonoBehaviour
 
         onAttack = false;
     }
+   
 }

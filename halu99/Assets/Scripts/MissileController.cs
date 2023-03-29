@@ -35,8 +35,6 @@ public class MissileController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print("123");
-
         // 충돌횟수 차감.
         --MissileHp;
 
