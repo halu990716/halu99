@@ -29,18 +29,17 @@ public class EnemyManager : MonoBehaviour
 
     private int rand;
 
-    // ** 플레이어의 누적 이동 거리
-    public float Distance;
+    private bool Boss;
 
     private void Awake()
     {
         if (instance == null)
         {
-            instance = this;
-
-            Distance = 0.0f;
+            instance = this;;
 
             rand = 1;
+
+            Boss = false;
 
             // ** 씬이 변경되어도 계속 유지될 수 있게 해준다.
             //DontDestroyOnLoad(gameObject);
@@ -55,58 +54,77 @@ public class EnemyManager : MonoBehaviour
     {
         while (true)
         {
-            rand = Random.Range(Enemy_1_A, Enemy_1_D + 1);
-
-            switch (rand)
+            for (int i = 98; i <= 100; ++i)
             {
-                case Enemy_1_A:
+                rand = Random.Range(Enemy_1_A, Enemy_1_D + 1);
 
-                    // ** Enemy로 사용할 원형 객체
-                    prefab = Resources.Load("Prefabs/Enemy/Enemy_1_A") as GameObject;
+                if (i == 100 && !Boss)
+                {
+                    Boss = true;
 
-                    break;
+                    prefab = Resources.Load("Prefabs/Enemy/Enemy_2_A") as GameObject;
 
-                case Enemy_1_B:
+                    GameObject Obj = Instantiate(prefab);
 
-                    prefab = Resources.Load("Prefabs/Enemy/Enemy_1_B") as GameObject;
+                    Obj.transform.position = new Vector3(
+                        0.0f, 13.5f, 0.0f);
 
-                    break;
+                    Obj.transform.name = "Boss";
 
-                case Enemy_1_C:
+                    Obj.transform.parent = Parent.transform;
+                }
+                else
+                {
+                    switch (rand)
+                    {
+                        case Enemy_1_A:
 
-                    prefab = Resources.Load("Prefabs/Enemy/Enemy_1_C") as GameObject;
+                            // ** Enemy로 사용할 원형 객체
+                            prefab = Resources.Load("Prefabs/Enemy/Enemy_1_A") as GameObject;
 
-                    break;
+                            break;
 
-                case Enemy_1_D:
+                        case Enemy_1_B:
 
-                    prefab = Resources.Load("Prefabs/Enemy/Enemy_1_D") as GameObject;
+                            prefab = Resources.Load("Prefabs/Enemy/Enemy_1_B") as GameObject;
 
-                    break;
+                            break;
+
+                        case Enemy_1_C:
+
+                            prefab = Resources.Load("Prefabs/Enemy/Enemy_1_C") as GameObject;
+
+                            break;
+
+                        case Enemy_1_D:
+
+                            prefab = Resources.Load("Prefabs/Enemy/Enemy_1_D") as GameObject;
+
+                            break;
+                    }
+
+                    // ** Enemy 원형객체를 복제한다.
+                    GameObject Obj = Instantiate(prefab);
+
+                    // ** Enemy 작동 스크립트 포함.
+                    //Obj.AddComponent<EnemyController>();
+
+                    // ** 클론의 위치를 초기화.
+                    Obj.transform.position = new Vector3(
+                        Random.Range(-13.0f, 13.0f), 10.0f, 0.0f);
+
+
+
+
+                    // ** 클론의 이름 초기화
+                    Obj.transform.name = "Enemy";
+
+                    // ** 클론의 계층구조 설정.
+                    Obj.transform.parent = Parent.transform;
+                }
+                // ** 1.5초 휴식.
+                yield return new WaitForSeconds(1.5f);
             }
-
-            // ** Enemy 원형객체를 복제한다.
-            GameObject Obj = Instantiate(prefab);
-
-            // ** Enemy 작동 스크립트 포함.
-            //Obj.AddComponent<EnemyController>();
-
-            // ** 클론의 위치를 초기화.
-            Obj.transform.position = new Vector3(
-                Random.Range(-13.0f, 13.0f),10.0f, 0.0f);
-
-            
-
-
-            // ** 클론의 이름 초기화
-            Obj.transform.name = "Enemy";
-
-            // ** 클론의 계층구조 설정.
-            Obj.transform.parent = Parent.transform;
-
-            
-            // ** 1.5초 휴식.
-            yield return new WaitForSeconds(1.5f);
         }
     }
 

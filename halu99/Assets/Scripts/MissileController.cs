@@ -38,20 +38,28 @@ public class MissileController : MonoBehaviour
         // 충돌횟수 차감.
         --MissileHp;
 
+        // 이펙트효과 복제.
+        GameObject Obj = Instantiate(fxPrefab);
+
+        // 이펙트 효과의 위치를 지정
+        Obj.transform.position = transform.position;
+
         // ** collision = 충돌한 대상.
         // ** 충돌한 대상을 삭제한다.
         if (collision.transform.tag == "Wall")
             Destroy(this.gameObject, 0.016f);
+        else
+        {
+            // ** 진동효과를 생성할 관리자 생성.
+            GameObject camera = new GameObject("CameraController");
+
+            // ** 진동 효과 컨트롤러 생성.
+            camera.AddComponent<CameraController>();
+        }
 
         // ** 총알의 충돌 횟수가 0이 되면 총알 삭제.
         if (MissileHp == 0)
         {
-            // 이펙트효과 복제.
-            GameObject Obj = Instantiate(fxPrefab);
-
-            // 이펙트 효과의 위치를 지정
-            Obj.transform.position = transform.position;
-
             Destroy(this.gameObject, 0.016f);
         }
     }

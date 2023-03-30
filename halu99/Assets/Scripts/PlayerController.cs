@@ -17,16 +17,28 @@ public class PlayerController : MonoBehaviour
     // ** 움직이는 속도
     private float Speed;
 
+    // 공격속도
     private float AttackSpeed;
 
+    // 카메라 범위
     private float minX, maxX, minY, maxY;
 
+    // 플레이어가 마지막으로 바라본 방향.
+    private float Direction;
+
+    // 피격이 가능한가
+    private bool WaitHit;
+
+    // 체력
     [HideInInspector] public int HP;
 
     private bool onAttack; // 공격상태
 
     // 움직임을 저장하는 벡터
     private Vector3 Movement;
+
+    // 플레이어의 Animator 구성요소를 받아오기 위해...
+    private Animator Ani;
 
 
     // 플레이어의 SpriteRenderer 구성요소를 받아오기 위해...
@@ -49,29 +61,31 @@ public class PlayerController : MonoBehaviour
         switch (Player_List)
         {
             case Ship_1_A:
-
                 MissilePrefab = Resources.Load("Prefabs/Player/Missile/Missile_A") as GameObject;
+                ControllerManager.GetInstance().Player_HP++;
 
                 break;
 
             case Ship_1_B:
-
                 MissilePrefab = Resources.Load("Prefabs/Player/Missile/Missile_B") as GameObject;
+                ControllerManager.GetInstance().MissileHp++;
 
                 break;
 
             case Ship_1_C:
-
                 MissilePrefab = Resources.Load("Prefabs/Player/Missile/Missile_C") as GameObject;
+                ControllerManager.GetInstance().MissileDamage++;
 
                 break;
 
             case Ship_1_D:
-
                 MissilePrefab = Resources.Load("Prefabs/Player/Missile/Missile_D") as GameObject;
+                ControllerManager.GetInstance().AttackSpeed -= 0.3f;
 
                 break;
         }
+
+        Ani = this.GetComponent<Animator>();
     }
 
     void Start()
@@ -79,8 +93,11 @@ public class PlayerController : MonoBehaviour
         //  속도를 초기화.
         Speed = 7.0f;
 
+        WaitHit = false;
         // ** 초기값 셋팅
         onAttack = false;
+
+        Direction = 1.0f;
 
         minX = -Camera.main.orthographicSize * Camera.main.aspect - 5.0f;
         maxX = Camera.main.orthographicSize * Camera.main.aspect + 5.0f;
@@ -92,11 +109,13 @@ public class PlayerController : MonoBehaviour
     {
         HP = ControllerManager.GetInstance().Player_HP;
 
-
-
         // **  Input.GetAxis =     -1 ~ 1 사이의 값을 반환함. 
         float Hor = Input.GetAxisRaw("Horizontal"); // -1 or 0 or 1 셋중에 하나를 반환.
         float Ver = Input.GetAxisRaw("Vertical"); // -1 or 0 or 1 셋중에 하나를 반환.
+
+        // Hor이 0이라면 멈춰있는 상태이므로 예외처리를 해준다.
+        if (Hor != 0)
+            Direction = Hor;
 
         // 입력받은 값으로 플레이어를 움직인다.
         Movement = new Vector3(
@@ -105,6 +124,13 @@ public class PlayerController : MonoBehaviour
             0.0f);
 
         transform.position += Movement;
+
+        if (Hor > 0.0f)
+            transform.localEulerAngles = new Vector3(0.0f, 0.0f, -10.0f);
+        else if(Hor < 0.0f)
+            transform.localEulerAngles = new Vector3(0.0f, 0.0f, 10.0f);
+        else
+            transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
 
         if (!onAttack)
         {
@@ -141,5 +167,25 @@ public class PlayerController : MonoBehaviour
 
         onAttack = false;
     }
-   
+
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.transform.tag == "Enemy" && !WaitHit)
+        {
+            Ani.SetTrigger("HIT");
+            WaitHit = true;
+            HP--;
+            ControllerManager.GetInstance().Player_HP = HP;
+
+            StartCoroutine(WaitHIT());
+        }
+    }
+
+    IEnumerator WaitHIT()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        WaitHit = false;
+    }
 }

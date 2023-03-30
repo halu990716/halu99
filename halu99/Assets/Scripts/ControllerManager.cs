@@ -20,9 +20,11 @@ public class ControllerManager
 
     public int MissileDamage = 1;
     public int MissileHp = 1;
-    public int AttackSpeed = 1;
+    public float AttackSpeed = 1;
 
     public int EnemyHp = 3;
+
+    public int BossHp = 3000;
 
 
 }

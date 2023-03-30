@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     private float Speed;
     private int HP;
-    private Animator Anim;
+    private Animator Ani;
     private Vector3 Movement;
     public GameObject Player;
 
@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
 
     private void Awake()
     {
-        Anim = GetComponent<Animator>();
+        Ani = GetComponent<Animator>();
     }
 
     private void Start()
@@ -41,8 +41,9 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.tag == "Missile")
         {
-
             HP = HP - ControllerManager.GetInstance().MissileDamage;
+
+            Ani.SetTrigger("HIT");
         }
         if (HP <= 0 )
         {
