@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
             Camera.main.transform.position = new Vector3(
                 Random.Range(OldPosition.x - offset.x, OldPosition.x + offset.x),
                 Random.Range(OldPosition.y - offset.y, OldPosition.y + offset.y),
-                -15.0f);
+                -30.0f);
         }
         // 반복문이 종료되면 카메라 위치를 다시 원점에 놓는다.
         Camera.main.transform.position = OldPosition;

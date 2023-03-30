@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 4447367859060878683}
   - component: {fileID: 2017524302582492650}
   - component: {fileID: 697485091192354917}
-  m_Layer: 0
+  - component: {fileID: -2670487410093760370}
+  m_Layer: 8
   m_Name: Pickup_1_B
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,3 +102,15 @@ CapsuleCollider2D:
   m_Offset: {x: -6.009344e-10, y: -0.0050410037}
   m_Size: {x: 1.2800002, y: 0.84646904}
   m_Direction: 1
+--- !u!114 &-2670487410093760370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3567766697900797337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcf6496826b587a43aaf53a303bd6bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

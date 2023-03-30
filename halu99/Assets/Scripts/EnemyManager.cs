@@ -27,6 +27,8 @@ public class EnemyManager : MonoBehaviour
 
     private GameObject prefab;
 
+    public GameObject BossHpBar;
+
     private int rand;
 
     private bool Boss;
@@ -67,11 +69,13 @@ public class EnemyManager : MonoBehaviour
                     GameObject Obj = Instantiate(prefab);
 
                     Obj.transform.position = new Vector3(
-                        0.0f, 13.5f, 0.0f);
+                        0.0f, 25.0f, 0.0f);
 
                     Obj.transform.name = "Boss";
 
                     Obj.transform.parent = Parent.transform;
+
+                    BossHpBar.SetActive(true);
                 }
                 else
                 {
@@ -111,7 +115,7 @@ public class EnemyManager : MonoBehaviour
 
                     // ** 클론의 위치를 초기화.
                     Obj.transform.position = new Vector3(
-                        Random.Range(-13.0f, 13.0f), 10.0f, 0.0f);
+                        Random.Range(-8.0f, 8.0f), 20.0f, 0.0f);
 
 
 

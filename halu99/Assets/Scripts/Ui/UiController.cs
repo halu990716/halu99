@@ -7,22 +7,44 @@ using UnityEngine.SceneManagement;
 
 public class UiController : MonoBehaviour
 {
-    public GameObject GameStart;
+    private GameObject Titel;
+    private GameObject GameStart;
     public GameObject PlayerList;
+    private GameObject Tutorial;
+    private GameObject TutorialBoard;
 
     public bool GameStartActive;
 
+    private void Awake()
+    {
+        Titel = GameObject.Find("Titel");
+        GameStart = GameObject.Find("Game Start Button");
+        Tutorial = GameObject.Find("Tutorial");
+        TutorialBoard = GameObject.Find("Tutorial Board");
+    }
     private void Start()
     {
         GameStartActive = true;
         GameStart.SetActive(GameStartActive);
+        Tutorial.SetActive(GameStartActive); 
     }
 
     public void onTitleStart()
     {
         GameStartActive = !GameStartActive;
+        Titel.SetActive(GameStartActive);
         GameStart.SetActive(GameStartActive);
+        Tutorial.SetActive(GameStartActive);
         PlayerList.SetActive(!GameStartActive);
+    }
+
+    public void onTitleTutorial()
+    {
+        GameStartActive = !GameStartActive;
+        Titel.SetActive(GameStartActive);
+        GameStart.SetActive(GameStartActive);
+        Tutorial.SetActive(GameStartActive);
+
     }
 
     public void onPlayer1()

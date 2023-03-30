@@ -31,6 +31,8 @@ public class PlayerHPvar : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
 
+        ControllerManager.GetInstance().Player_MaxHp = ControllerManager.GetInstance().Player_HP;
+
         HPBar.maxValue = ControllerManager.GetInstance().Player_HP;
         HPBar.value = HPBar.maxValue;
     }

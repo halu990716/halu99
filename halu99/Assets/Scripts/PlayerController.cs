@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
         {
             case Ship_1_A:
                 MissilePrefab = Resources.Load("Prefabs/Player/Missile/Missile_A") as GameObject;
-                ControllerManager.GetInstance().Player_HP++;
+                ControllerManager.GetInstance().Player_HP += 2;
 
                 break;
 
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         //  속도를 초기화.
-        Speed = 7.0f;
+        Speed = 10.0f;
 
         WaitHit = false;
         // ** 초기값 셋팅
@@ -99,10 +99,10 @@ public class PlayerController : MonoBehaviour
 
         Direction = 1.0f;
 
-        minX = -Camera.main.orthographicSize * Camera.main.aspect - 5.0f;
-        maxX = Camera.main.orthographicSize * Camera.main.aspect + 5.0f;
-        minY = -Camera.main.orthographicSize - 2.0f;
-        maxY = Camera.main.orthographicSize + 3.0f;
+        minX = -Camera.main.orthographicSize * Camera.main.aspect - 5.5f;
+        maxX = Camera.main.orthographicSize * Camera.main.aspect + 5.5f;
+        minY = -Camera.main.orthographicSize - 9.0f;
+        maxY = Camera.main.orthographicSize + 10.0f;
     }
 
     void Update()

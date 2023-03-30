@@ -8,9 +8,6 @@ public class BossController : MonoBehaviour
 
     private Animator Ani;
 
-    // ** 플레이어의 SpriteRenderer 구성요소를 받아오기위해...
-    private SpriteRenderer renderer;
-
     private Vector3 Movement;
 
     private float Speed;
@@ -26,7 +23,6 @@ public class BossController : MonoBehaviour
         Speed = 5.0f;
 
         Movement = new Vector3(0.0f, Speed, 0.0f);
-        renderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -41,7 +37,7 @@ public class BossController : MonoBehaviour
 
     private void Move() 
     {
-        if (transform.position.y >   6.0f)
+        if (transform.position.y >   14.0f)
             transform.position -= Movement * Time.deltaTime;
     }
 

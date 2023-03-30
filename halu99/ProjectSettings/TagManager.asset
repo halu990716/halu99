@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - FxTemporaire
   - Enemy
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - UI
   - Missile
   - Enemy
-  - 
+  - Item
   - 
   - 
   - 

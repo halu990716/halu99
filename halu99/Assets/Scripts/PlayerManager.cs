@@ -29,8 +29,6 @@ public class PlayerManager : MonoBehaviour
 
     private GameObject prefab;
 
-    // ** 플레이어의 누적 이동 거리
-    public float Distance;
 
     private void Awake()
     {
@@ -39,10 +37,7 @@ public class PlayerManager : MonoBehaviour
             Player_List = ControllerManager.GetInstance().Player_List;
 
             instance = this;
-
-            Distance = 0.0f;
 ;
-
             // ** 생성되는 Player를 담아둘 상위 객체
             //Parent = new GameObject("PlayerParent");
 

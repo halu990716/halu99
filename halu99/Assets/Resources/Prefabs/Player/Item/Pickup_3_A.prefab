@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1873462231313553402}
   - component: {fileID: 7318337645628040257}
   - component: {fileID: 7340906902966819182}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pickup_3_A
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

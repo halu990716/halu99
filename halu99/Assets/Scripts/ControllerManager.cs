@@ -13,8 +13,11 @@ public class ControllerManager
             Instance = new ControllerManager();
         return Instance;
     }
+    public int Rand = 1;
+
     public int Player_List = 1;
 
+    public int Player_MaxHp = 3;
     public int Player_HP = 3;
 
 
