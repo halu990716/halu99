@@ -13,6 +13,9 @@ public class UiController : MonoBehaviour
     private GameObject Tutorial;
     private GameObject TutorialBoard;
 
+    private Animator Ani;
+
+
     public bool GameStartActive;
 
     private void Awake()
