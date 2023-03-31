@@ -115,7 +115,7 @@ public class EnemyManager : MonoBehaviour
 
                     // ** 클론의 위치를 초기화.
                     Obj.transform.position = new Vector3(
-                        Random.Range(-8.0f, 8.0f), 20.0f, 0.0f);
+                        Random.Range(-8.0f, 8.0f), Random.Range(20.0f, 25.0f), 0.0f);
 
 
 

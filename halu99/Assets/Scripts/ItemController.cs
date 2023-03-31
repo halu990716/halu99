@@ -13,8 +13,11 @@ public class ItemController : MonoBehaviour
     private int rand;
 
     private float Speed;
+    private bool xMove;
 
     private Vector3 Movement;
+    private Vector3 MovementX;
+    private Vector3 OldPosition;
 
     private void Awake()
     {
@@ -23,12 +26,20 @@ public class ItemController : MonoBehaviour
     void Start()
     {
         Speed = 1.0f;
-        Movement = new Vector3(0.0f, Speed, 0.0f);
+        xMove = true;
+        OldPosition = transform.position;
+        Movement = new Vector3(1.0f, Speed, 0.0f);
+        MovementX = new Vector3(-1.0f, Speed, 0.0f);
+
+        StartCoroutine(ItemX());
     }
 
     void Update()
     {
-        transform.position -= Movement * Time.deltaTime;
+        if(xMove)
+            transform.position -= Movement * Time.deltaTime;
+        else
+            transform.position -= MovementX * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -43,15 +54,18 @@ public class ItemController : MonoBehaviour
                     break;
 
                 case Pickup_1_B:
-                    ControllerManager.GetInstance().MissileHp++;
+                    if(ControllerManager.GetInstance().MissileHp < 3)
+                        ControllerManager.GetInstance().MissileHp++;
                     break;
 
                 case Pickup_1_C:
-                    ControllerManager.GetInstance().MissileDamage++;
+                    if (ControllerManager.GetInstance().MissileDamage < 5)
+                        ControllerManager.GetInstance().MissileDamage++;
                     break;
 
                 case Pickup_1_D:
-                    ControllerManager.GetInstance().AttackSpeed *= 0.9f;
+                    if (ControllerManager.GetInstance().AttackCount < 5)
+                        ControllerManager.GetInstance().AttackCount++;
                     break;
             }
 
@@ -59,5 +73,15 @@ public class ItemController : MonoBehaviour
         }
         if (collision.transform.tag == "Wall")
             Destroy(this.gameObject, 0.016f);
+    }
+
+    IEnumerator ItemX()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1.0f);
+
+            xMove = !xMove;
+        }
     }
 }

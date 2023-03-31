@@ -15,7 +15,9 @@ public class EnemyController : MonoBehaviour
     private Animator Ani;
     private Vector3 Movement;
 
-    public GameObject prefab;
+    private GameObject Parent;
+    private GameObject Missile;
+    private GameObject prefab;
 
     private int rand;
 
@@ -24,17 +26,22 @@ public class EnemyController : MonoBehaviour
     private void Awake()
     {
         Ani = GetComponent<Animator>();
+        Missile = Resources.Load("Prefabs/Enemy/Missile/Missile") as GameObject;
 
         rand = 1;
+
+        Parent = GameObject.Find("EnemyList");
     }
 
     private void Start()
     {
-        Speed = 0.3f;
+        Speed = 3.0f;
         Movement = new Vector3(0.0f, Speed, 0.0f);
         HP = ControllerManager.GetInstance().EnemyHp;
 
         Run = true;
+
+        StartCoroutine(EnemyAttack());
     }
 
     private void Update()
@@ -53,7 +60,9 @@ public class EnemyController : MonoBehaviour
 
             Ani.SetTrigger("HIT");
         }
-        if (HP <= 0 )
+        if (collision.tag == "Wall")
+            Destroy(gameObject, 0.016f);
+        if (HP <= 0)
         {
             rand = Random.Range(Pickup_1_A, Pickup_1_D + 5);
 
@@ -88,10 +97,26 @@ public class EnemyController : MonoBehaviour
                 GameObject Obj = Instantiate(prefab);
 
                 Obj.transform.position = transform.position;
+                Obj.transform.parent = Parent.transform;
                 Obj.transform.name = "Item";
             }
             GetComponent<CapsuleCollider2D>().enabled = false;
             Destroy(gameObject, 0.016f);
+        }
+    }
+
+    IEnumerator EnemyAttack()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(5.0f);
+
+            GameObject Object = Instantiate(Missile);
+
+            Object.transform.position = transform.position;
+            Object.transform.parent = Parent.transform;
+            Object.transform.name = "EnemyMissile";
+
         }
     }
 }

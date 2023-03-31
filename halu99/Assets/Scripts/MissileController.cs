@@ -16,16 +16,20 @@ public class MissileController : MonoBehaviour
     // 이펙트효과 원본
     public GameObject fxPrefab;
 
+    private GameObject Parent;
+
     void Start()
     {
         // 속도의 초기값
-        Speed = 15.0f;
+        Speed = 20.0f;
 
         // 데미지의 초기값
         Damage = ControllerManager.GetInstance().MissileDamage;
 
         // 미사일 체력의 초기값
         MissileHp = ControllerManager.GetInstance().MissileHp;
+
+        Parent = GameObject.Find("EnemyList");
     }
 
     void Update()
@@ -43,6 +47,7 @@ public class MissileController : MonoBehaviour
 
         // 이펙트 효과의 위치를 지정
         Obj.transform.position = transform.position;
+        Obj.transform.parent = Parent.transform;
 
         // ** collision = 충돌한 대상.
         // ** 충돌한 대상을 삭제한다.

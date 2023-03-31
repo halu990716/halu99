@@ -9,6 +9,7 @@ TagManager:
   - FxTemporaire
   - Enemy
   - Item
+  - EnemyMissile
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Missile
   - Enemy
   - Item
-  - 
+  - EnemyMissile
   - 
   - 
   - 

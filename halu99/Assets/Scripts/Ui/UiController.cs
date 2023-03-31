@@ -13,10 +13,11 @@ public class UiController : MonoBehaviour
     private GameObject Tutorial;
     private GameObject TutorialBoard;
 
-    private Animator Ani;
+    private Animator TutorialBoardAni;
 
 
-    public bool GameStartActive;
+    private bool GameStartActive;
+    private bool TutorialBoardCheck;
 
     private void Awake()
     {
@@ -24,30 +25,40 @@ public class UiController : MonoBehaviour
         GameStart = GameObject.Find("Game Start Button");
         Tutorial = GameObject.Find("Tutorial");
         TutorialBoard = GameObject.Find("Tutorial Board");
+
+        TutorialBoardAni = TutorialBoard.GetComponent<Animator>();
     }
     private void Start()
     {
         GameStartActive = true;
+        TutorialBoardCheck = false;
         GameStart.SetActive(GameStartActive);
         Tutorial.SetActive(GameStartActive); 
     }
 
     public void onTitleStart()
     {
-        GameStartActive = !GameStartActive;
-        Titel.SetActive(GameStartActive);
-        GameStart.SetActive(GameStartActive);
-        Tutorial.SetActive(GameStartActive);
+        TitleSwich();
+
         PlayerList.SetActive(!GameStartActive);
     }
 
     public void onTitleTutorial()
     {
-        GameStartActive = !GameStartActive;
-        Titel.SetActive(GameStartActive);
-        GameStart.SetActive(GameStartActive);
-        Tutorial.SetActive(GameStartActive);
+        TitleSwich();
 
+        TutorialBoardCheck = !TutorialBoardCheck;
+
+        TutorialBoardAni.SetBool("Move", TutorialBoardCheck);
+    }
+
+    public void onCheckmark()
+    {
+        TitleSwich();
+
+        TutorialBoardCheck = !TutorialBoardCheck;
+
+        TutorialBoardAni.SetBool("Move", TutorialBoardCheck);
     }
 
     public void onPlayer1()
@@ -75,5 +86,13 @@ public class UiController : MonoBehaviour
         ControllerManager.GetInstance().Player_List = 4;
 
         SceneManager.LoadScene("Game");
+    }
+
+    private void TitleSwich()
+    {
+        GameStartActive = !GameStartActive;
+        Titel.SetActive(GameStartActive);
+        GameStart.SetActive(GameStartActive);
+        Tutorial.SetActive(GameStartActive);
     }
 }
