@@ -11,6 +11,8 @@ public class EnemyMissileController : MonoBehaviour
     private Vector3 Movement;
     private Vector3 EndPoint;
 
+    private int Hp;
+
     private float Speed;
     private float Distance;
 
@@ -25,7 +27,8 @@ public class EnemyMissileController : MonoBehaviour
 
         Distance = Vector3.Distance(EndPoint, transform.position);
 
-        Speed = 15.0f;
+        Hp = 1;
+        Speed = 5.0f;
 
     }
 
@@ -46,6 +49,13 @@ public class EnemyMissileController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Hp--;
+
+        if (Hp <= 0)
+        {
+            Destroy(gameObject, 0.016f);
+        }
+
         if (collision.transform.tag == "Wall")
             Destroy(this.gameObject, 0.016f);
 
@@ -54,7 +64,17 @@ public class EnemyMissileController : MonoBehaviour
         Obj.transform.parent = Parent.transform;
         Obj.transform.position = transform.position;
         Obj.transform.name = "Hit";
+
     }
 
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    Hp--;
+
+    //    if (Hp <= 0)
+    //    {
+    //        Destroy(gameObject, 0.016f);
+    //    }
+    //}
 
 }

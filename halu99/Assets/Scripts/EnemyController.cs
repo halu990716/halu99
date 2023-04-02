@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class EnemyController : MonoBehaviour
 {
@@ -42,6 +44,7 @@ public class EnemyController : MonoBehaviour
         Run = true;
 
         StartCoroutine(EnemyAttack());
+
     }
 
     private void Update()
@@ -60,8 +63,40 @@ public class EnemyController : MonoBehaviour
 
             Ani.SetTrigger("HIT");
         }
+
         if (collision.tag == "Wall")
             Destroy(gameObject, 0.016f);
+
+        Die();
+        
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Skill1")
+        {
+            HP = HP - 10;
+
+            Ani.SetTrigger("HIT");
+        }
+
+        Die();
+
+    }
+
+    IEnumerator EnemyAttack()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Random.Range(3.0f, 5.0f));
+
+            OnEnemyAttack();
+
+        }
+    }
+
+    private void Die()
+    {
         if (HP <= 0)
         {
             rand = Random.Range(Pickup_1_A, Pickup_1_D + 5);
@@ -90,33 +125,25 @@ public class EnemyController : MonoBehaviour
 
                     break;
             }
+        if (rand <= Pickup_1_D)
+        {
+            // ** Enemy 원형객체를 복제한다.
+            GameObject Obj = Instantiate(prefab);
 
-            if (rand <= Pickup_1_D)
-            {
-                // ** Enemy 원형객체를 복제한다.
-                GameObject Obj = Instantiate(prefab);
-
-                Obj.transform.position = transform.position;
-                Obj.transform.parent = Parent.transform;
-                Obj.transform.name = "Item";
-            }
-            GetComponent<CapsuleCollider2D>().enabled = false;
-            Destroy(gameObject, 0.016f);
+            Obj.transform.position = transform.position;
+            Obj.transform.parent = Parent.transform;
+            Obj.transform.name = "Item";
+        }
+        GetComponent<CapsuleCollider2D>().enabled = false;
+        Destroy(gameObject, 0.016f);
         }
     }
-
-    IEnumerator EnemyAttack()
+    private void OnEnemyAttack()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(5.0f);
+        GameObject Object = Instantiate(Missile);
 
-            GameObject Object = Instantiate(Missile);
-
-            Object.transform.position = transform.position;
-            Object.transform.parent = Parent.transform;
-            Object.transform.name = "EnemyMissile";
-
-        }
+        Object.transform.position = transform.position;
+        Object.transform.parent = Parent.transform;
+        Object.transform.name = "EnemyMissile";
     }
 }

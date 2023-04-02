@@ -56,7 +56,7 @@ public class EnemyManager : MonoBehaviour
     {
         while (true)
         {
-            for (int i = 98; i <= 100; ++i)
+            for (int i = 97; i <= 100; ++i)
             {
                 rand = Random.Range(Enemy_1_A, Enemy_1_D + 1);
 
@@ -126,8 +126,10 @@ public class EnemyManager : MonoBehaviour
                     // ** 클론의 계층구조 설정.
                     Obj.transform.parent = Parent.transform;
                 }
+                ControllerManager.GetInstance().EnemyHp++;
+
                 // ** 1.5초 휴식.
-                yield return new WaitForSeconds(1.5f);
+                yield return new WaitForSeconds(Random.Range(1.2f, 1.5f));
             }
         }
     }

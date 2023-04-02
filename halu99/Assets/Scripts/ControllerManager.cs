@@ -21,14 +21,14 @@ public class ControllerManager
     public int Player_HP = 3;
 
 
-    public int MissileDamage = 1;
+    public int MissileDamage = 10;
     public int MissileHp = 1;
     public float AttackSpeed = 1;
     public int AttackCount = 1;
 
-    public int EnemyHp = 3;
+    public int EnemyHp = 30;
 
-    public int BossHp = 3000;
+    public int BossHp = 30000;
 
 
 }

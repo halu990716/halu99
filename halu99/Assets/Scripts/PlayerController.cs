@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
             case Ship_1_C:
                 MissilePrefab = Resources.Load("Prefabs/Player/Missile/Missile_C") as GameObject;
-                ControllerManager.GetInstance().MissileDamage++;
+                ControllerManager.GetInstance().MissileDamage += 10;
 
                 break;
 
@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
         onAttack = false;
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.tag == "Enemy" && !WaitHit)
         {
@@ -200,9 +200,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    if (collision.transform.tag == "Enemy" && !WaitHit)
+    //    {
+    //        OnHit();
+    //    }
+
+    //    if (collision.transform.tag == "EnemyMissile" && !WaitHit)
+    //    {
+    //        OnHit();
+    //    }
+    //}
+
     IEnumerator WaitHIT()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
 
         WaitHit = false;
     }

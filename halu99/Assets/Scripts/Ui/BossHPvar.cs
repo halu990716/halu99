@@ -20,5 +20,10 @@ public class BossHPvar : MonoBehaviour
     void Update()
     {
         HpBar.value = ControllerManager.GetInstance().BossHp;
+
+        if (HpBar.value <= 0)
+        {
+            Destroy(HpBar.gameObject, 3.0f);
+        }
     }
 }
