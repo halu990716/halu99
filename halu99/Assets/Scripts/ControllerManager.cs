@@ -28,7 +28,19 @@ public class ControllerManager
 
     public int EnemyHp = 30;
 
-    public int BossHp = 30000;
+    public int BossHp = 30;
 
 
+    public string UserName;
+
+    public int ClearTime = 9999;
+
+    public string BastUserName;
+    public int BastClearTime = 1111;
+
+    public string SecondUserName;
+    public int SecondClearTime = 2222;
+
+    public string ThirdName;
+    public int ThirdClearTime = 3333;
 }

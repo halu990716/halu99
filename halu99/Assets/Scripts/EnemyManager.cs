@@ -56,11 +56,11 @@ public class EnemyManager : MonoBehaviour
     {
         while (true)
         {
-            for (int i = 97; i <= 100; ++i)
+            for (int i = 0; i <= 100; ++i)
             {
                 rand = Random.Range(Enemy_1_A, Enemy_1_D + 1);
 
-                if (i == 100 && !Boss)
+                if (i == 3 && !Boss)
                 {
                     Boss = true;
 

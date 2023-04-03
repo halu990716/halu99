@@ -13,18 +13,21 @@ public class BossController : MonoBehaviour
         ScrewPattern
     };
 
-    public GameObject Target;
+    private GameObject Target;
 
     private Animator Ani;
 
-    public Sprite sprite;
+    private Sprite sprite;
 
     private Vector3 Movement;
 
-    public List<GameObject> MissiletList = new List<GameObject>();
-    public GameObject BossMissile;
-    public GameObject EnemyMissile;
-    public GameObject EnemyManager;
+    private List<GameObject> MissiletList = new List<GameObject>();
+    private GameObject BossMissile;
+    private GameObject EnemyMissile;
+    private GameObject EnemyManager;
+    private GameObject Timer;
+    private GameObject ClearBoard;
+
 
     private int HP;
     private int Rand;
@@ -35,8 +38,10 @@ public class BossController : MonoBehaviour
     {
         Target = GameObject.Find("Player");
         EnemyManager = GameObject.Find("EnemyManager");
+        Timer = GameObject.Find("Timer");
         BossMissile = Resources.Load("Prefabs/Enemy/Missile/BossMissile") as GameObject;
         EnemyMissile = Resources.Load("Prefabs/Enemy/Missile/Missile2") as GameObject;
+        ClearBoard = GameObject.Find("ClearBoard");
 
         Ani = GetComponent<Animator>();
 
@@ -306,7 +311,14 @@ public class BossController : MonoBehaviour
     {
         if (HP <= 0)
         {
+            TimerController sTimer = Timer.GetComponent<TimerController>();
+
+            ControllerManager.GetInstance().ClearTime = sTimer.timer;
+
+            ClearBoard.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+
             Destroy(gameObject, 0.016f);
+
         }
     }
 }

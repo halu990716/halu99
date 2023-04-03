@@ -28,7 +28,7 @@ public class EnemyMissileController : MonoBehaviour
         Distance = Vector3.Distance(EndPoint, transform.position);
 
         Hp = 1;
-        Speed = 5.0f;
+        Speed = 8.0f;
 
     }
 
