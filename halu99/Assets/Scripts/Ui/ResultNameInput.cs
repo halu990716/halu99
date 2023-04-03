@@ -6,13 +6,14 @@ using UnityEngine.UI;
 public class ResultNameInput : MonoBehaviour
 {
     public GameObject PalyerNameInput;
+    public GameObject HomeButton;
 
     public InputField inputField;
     private string playerName = null;
 
     private void Awake()
     {
-        //PalyerNameInput = GameObject.Find("Palyer Name Input");
+        //HomeButton = GameObject.Find("Palyer Name Input");
         playerName = inputField.GetComponent<InputField>().text;
     }
 
@@ -30,6 +31,7 @@ public class ResultNameInput : MonoBehaviour
         PlayerPrefs.SetString("CurrentPlayerName", playerName);
 
         PalyerNameInput.SetActive(false);
+        HomeButton.SetActive(true);
         ControllerManager.GetInstance().UserName = playerName;
         //GameManager.instance.ScoreSet(GameManager.instance.score, playerName);
     }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static BossController;
 
 public class BossController : MonoBehaviour
 {
@@ -26,13 +27,14 @@ public class BossController : MonoBehaviour
     private GameObject EnemyMissile;
     private GameObject EnemyManager;
     private GameObject Timer;
-    private GameObject ClearBoard;
-
 
     private int HP;
     private int Rand;
     private float Speed;
     private float WaitPattern;
+
+    private float PatternPosition;
+    private bool pattern;
 
     private void Awake()
     {
@@ -41,11 +43,13 @@ public class BossController : MonoBehaviour
         Timer = GameObject.Find("Timer");
         BossMissile = Resources.Load("Prefabs/Enemy/Missile/BossMissile") as GameObject;
         EnemyMissile = Resources.Load("Prefabs/Enemy/Missile/Missile2") as GameObject;
-        ClearBoard = GameObject.Find("ClearBoard");
 
         Ani = GetComponent<Animator>();
 
-        Speed = 5.0f;
+        Speed = 15.0f;
+        PatternPosition = 14.0f;
+
+        pattern = false;
 
         WaitPattern = UnityEngine.Random.Range(7.0f, 10.0f);
 
@@ -67,8 +71,10 @@ public class BossController : MonoBehaviour
 
     private void Move() 
     {
-        if (transform.position.y >   14.0f)
+        if (transform.position.y > PatternPosition && !pattern)
             transform.position -= Movement * Time.deltaTime;
+        if (transform.position.y < PatternPosition && pattern)
+            transform.position += Movement * Time.deltaTime;
     }
 
     private IEnumerator BossPattern()
@@ -76,7 +82,6 @@ public class BossController : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(WaitPattern);
-
 
             Pattern rand = (Pattern)(UnityEngine.Random.Range(0, Enum.GetNames(typeof(Pattern)).Length));
             
@@ -88,6 +93,9 @@ public class BossController : MonoBehaviour
 
                 case Pattern.Explosion:
                     StartCoroutine(ExplosionPattern(5.0f, (int)(360 / 5.0f)));
+                    StartCoroutine(PatternPositionWait());
+                    PatternPosition = 0.0f;
+                    pattern = false;
                     break;
 
                 case Pattern.ScrewPattern:
@@ -163,7 +171,6 @@ public class BossController : MonoBehaviour
             ++i;
             yield return new WaitForSeconds(0.025f);
         }
-
     }
 
     public IEnumerator TwistPattern()
@@ -224,6 +231,8 @@ public class BossController : MonoBehaviour
 
     public IEnumerator ExplosionPattern(float _angle, int _count, bool _option = true)
     {
+        yield return new WaitForSeconds(1.0f);
+
         GameObject ParentObj = new GameObject("Missile");
 
         //parentObj.AddComponent<MyGizmo>();
@@ -239,7 +248,7 @@ public class BossController : MonoBehaviour
 
         ParentObj.transform.position = transform.position;
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
 
         Vector3 pos = ParentObj.transform.position;
 
@@ -280,6 +289,15 @@ public class BossController : MonoBehaviour
         Obj.transform.position = transform.position;
     }
 
+    private IEnumerator PatternPositionWait()
+    {
+        yield return new WaitForSeconds(WaitPattern * 0.3f);
+
+        PatternPosition = 14.0f;
+
+        pattern = true;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Missile")
@@ -311,11 +329,12 @@ public class BossController : MonoBehaviour
     {
         if (HP <= 0)
         {
+
             TimerController sTimer = Timer.GetComponent<TimerController>();
 
-            ControllerManager.GetInstance().ClearTime = sTimer.timer;
+            ControllerManager.GetInstance().BossDie = true;
 
-            ClearBoard.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+            ControllerManager.GetInstance().ClearTime = sTimer.timer;
 
             Destroy(gameObject, 0.016f);
 

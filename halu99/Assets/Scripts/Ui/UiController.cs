@@ -41,6 +41,20 @@ public class UiController : MonoBehaviour
         TitleSwich();
 
         PlayerList.SetActive(!GameStartActive);
+
+        ControllerManager.GetInstance().Player_MaxHp = 3;
+        ControllerManager.GetInstance().Player_HP = 3;
+
+        ControllerManager.GetInstance().MissileDamage = 10;
+        ControllerManager.GetInstance().MissileHp = 1;
+        ControllerManager.GetInstance().AttackSpeed = 1;
+        ControllerManager.GetInstance().AttackCount = 1;
+        ControllerManager.GetInstance().MissileCount = 0;
+        ControllerManager.GetInstance().EnemyHp = 30;
+
+        ControllerManager.GetInstance().BossHp = 30000;
+        ControllerManager.GetInstance().BossDie = false;
+
     }
 
     public void onTitleTutorial()

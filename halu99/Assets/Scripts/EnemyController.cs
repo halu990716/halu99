@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour
     const int Pickup_1_B = 2;
     const int Pickup_1_C = 3;
     const int Pickup_1_D = 4;
+    const int Hiden = 5;
 
 
     private float Speed;
@@ -24,6 +25,7 @@ public class EnemyController : MonoBehaviour
     private int rand;
 
     private bool Run;
+    private bool HidenB;
 
     private void Awake()
     {
@@ -31,6 +33,7 @@ public class EnemyController : MonoBehaviour
         Missile = Resources.Load("Prefabs/Enemy/Missile/Missile") as GameObject;
 
         rand = 1;
+        HidenB = false;
 
         Parent = GameObject.Find("EnemyList");
     }
@@ -88,7 +91,7 @@ public class EnemyController : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(3.0f, 5.0f));
+            yield return new WaitForSeconds(Random.Range(2.0f, 5.0f));
 
             OnEnemyAttack();
 
@@ -99,7 +102,7 @@ public class EnemyController : MonoBehaviour
     {
         if (HP <= 0)
         {
-            rand = Random.Range(Pickup_1_A, Pickup_1_D + 5);
+            rand = Random.Range(Pickup_1_A, Hiden + 4);
 
             ControllerManager.GetInstance().Rand = rand;
 
@@ -124,8 +127,23 @@ public class EnemyController : MonoBehaviour
                     prefab = Resources.Load("Prefabs/Player/Item/Pickup_1_D") as GameObject;
 
                     break;
+
+                case Hiden:
+                    rand = Random.Range(Pickup_1_A, Hiden + 1);
+                    ControllerManager.GetInstance().Rand = rand;
+
+                    HidenB = true;
+                    switch (rand)
+                    {
+                        case Hiden:
+                            prefab = Resources.Load("Prefabs/Player/Item/Pickup_1_Hiden") as GameObject;
+                            HidenB = false;
+
+                            break;
+                    }
+                    break;
             }
-        if (rand <= Pickup_1_D)
+        if (rand <= Hiden && !HidenB)
         {
             // ** Enemy 원형객체를 복제한다.
             GameObject Obj = Instantiate(prefab);

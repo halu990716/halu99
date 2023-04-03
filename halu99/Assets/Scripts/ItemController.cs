@@ -8,6 +8,7 @@ public class ItemController : MonoBehaviour
     const int Pickup_1_B = 2;
     const int Pickup_1_C = 3;
     const int Pickup_1_D = 4;
+    const int Pickup_1_Hiden = 5;
 
 
     private int rand;
@@ -66,6 +67,10 @@ public class ItemController : MonoBehaviour
                 case Pickup_1_D:
                     if (ControllerManager.GetInstance().AttackCount < 5)
                         ControllerManager.GetInstance().AttackCount++;
+                    break;
+
+                case Pickup_1_Hiden:
+                    ControllerManager.GetInstance().MissileCount++;
                     break;
             }
 

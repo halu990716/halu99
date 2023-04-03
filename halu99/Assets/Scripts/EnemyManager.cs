@@ -31,6 +31,8 @@ public class EnemyManager : MonoBehaviour
 
     private int rand;
 
+    private float Wait;
+
     private bool Boss;
 
     private void Awake()
@@ -40,6 +42,8 @@ public class EnemyManager : MonoBehaviour
             instance = this;;
 
             rand = 1;
+
+            Wait = 1.5f;
 
             Boss = false;
 
@@ -60,7 +64,7 @@ public class EnemyManager : MonoBehaviour
             {
                 rand = Random.Range(Enemy_1_A, Enemy_1_D + 1);
 
-                if (i == 3 && !Boss)
+                if (i == 100 && !Boss)
                 {
                     Boss = true;
 
@@ -76,6 +80,8 @@ public class EnemyManager : MonoBehaviour
                     Obj.transform.parent = Parent.transform;
 
                     BossHpBar.SetActive(true);
+
+                    Wait = 3.0f;
                 }
                 else
                 {
@@ -128,10 +134,19 @@ public class EnemyManager : MonoBehaviour
                 }
                 ControllerManager.GetInstance().EnemyHp++;
 
+                if (Wait >= 0.5f && !Boss)
+                    Wait -= 0.1f;
+
                 // ** 1.5ÃÊ ÈÞ½Ä.
-                yield return new WaitForSeconds(Random.Range(1.2f, 1.5f));
+                yield return new WaitForSeconds(Random.Range(Wait, Wait +0.3f));
             }
         }
+    }
+
+    private void Update()
+    {
+        if (ControllerManager.GetInstance().BossDie)
+            Destroy(gameObject, 0.016f);
     }
 
 }

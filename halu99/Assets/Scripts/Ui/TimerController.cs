@@ -11,6 +11,11 @@ public class TimerController : MonoBehaviour
     [HideInInspector]
     public int timer;
 
+    private void Awake()
+    {
+        
+    }
+
     private void Start()
     {
         StartCoroutine(TimerCoroution());
@@ -25,5 +30,11 @@ public class TimerController : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         StartCoroutine(TimerCoroution());
+
+        if (ControllerManager.GetInstance().BossDie)
+        {
+            ControllerManager.GetInstance().BossDie = false;
+            Destroy(gameObject, 0.016f);
+        }
     }
 }

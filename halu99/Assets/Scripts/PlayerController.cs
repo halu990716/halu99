@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private float AttackSpeed;
 
     private int AttackCount;
+    private int MissileCount;
 
     // 카메라 범위
     private float minX, maxX, minY, maxY;
@@ -114,11 +115,7 @@ public class PlayerController : MonoBehaviour
         HP = ControllerManager.GetInstance().Player_HP;
         AttackSpeed = ControllerManager.GetInstance().AttackSpeed;
         AttackCount = ControllerManager.GetInstance().AttackCount;
-
-        if (AttackSpeed > 0.1f)
-        {
-            AttackSpeed -= (AttackCount / 10);
-        }
+        MissileCount = ControllerManager.GetInstance().MissileCount;
 
         // **  Input.GetAxis =     -1 ~ 1 사이의 값을 반환함. 
         float Hor = Input.GetAxisRaw("Horizontal"); // -1 or 0 or 1 셋중에 하나를 반환.
@@ -182,6 +179,28 @@ public class PlayerController : MonoBehaviour
 
             // ** 모든 설정이 종료되었다면 저장소에 보관한다.
             Missile.Add(Obj);
+
+            if (MissileCount >= 1)
+            {
+                GameObject Obje = Instantiate(MissilePrefab);
+
+                Obje.transform.position = new Vector3(transform.position.x - 1.0f, transform.position.y, 0.0f);
+                Obje.transform.name = "Missile";
+                Obje.transform.parent = Parent.transform;
+
+                Missile.Add(Obje);
+            }
+
+            if (MissileCount >= 2)
+            {
+                GameObject Objec = Instantiate(MissilePrefab);
+
+                Objec.transform.position = new Vector3(transform.position.x + 1.0f, transform.position.y, 0.0f);
+                Objec.transform.name = "Missile";
+                Objec.transform.parent = Parent.transform;
+
+                Missile.Add(Objec);
+            }
         }
 
         onAttack = false;

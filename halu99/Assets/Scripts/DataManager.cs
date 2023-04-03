@@ -41,6 +41,8 @@ public class DataManager : MonoBehaviour
     private string thirdUserName;
     private int thirdClearTime;
 
+    private GameObject ClearBoard;
+
     void Awake()
     {
         var jsonData = Resources.Load<TextAsset>("saveFile/Data");
@@ -72,13 +74,24 @@ public class DataManager : MonoBehaviour
 
         ControllerManager.GetInstance().ThirdName = thirdUserName;
         ControllerManager.GetInstance().ThirdClearTime = thirdClearTime;
+
     }
 
     void Update()
     {
+ 
+    }
 
+    public void UpDateRank()
+    {
         if (bastClearTime > ControllerManager.GetInstance().ClearTime)
         {
+            thirdUserName = secondUserName;
+            thirdClearTime = secondClearTime;
+
+            secondUserName = bastUserName;
+            secondClearTime = bastClearTime;
+         
             bastUserName = ControllerManager.GetInstance().UserName;
             bastClearTime = ControllerManager.GetInstance().ClearTime;
             SaveData(bastUserName, bastClearTime.ToString(), secondUserName,
@@ -87,6 +100,9 @@ public class DataManager : MonoBehaviour
 
         else if (secondClearTime > ControllerManager.GetInstance().ClearTime)
         {
+            thirdUserName = secondUserName;
+            thirdClearTime = secondClearTime;
+
             secondUserName = ControllerManager.GetInstance().UserName;
             secondClearTime = ControllerManager.GetInstance().ClearTime;
             SaveData(bastUserName, bastClearTime.ToString(), secondUserName,
@@ -101,6 +117,14 @@ public class DataManager : MonoBehaviour
                 secondClearTime.ToString(), thirdUserName, thirdClearTime.ToString());
         }
 
+        ControllerManager.GetInstance().BastUserName = bastUserName;
+        ControllerManager.GetInstance().BastClearTime = bastClearTime;
+
+        ControllerManager.GetInstance().SecondUserName = secondUserName;
+        ControllerManager.GetInstance().SecondClearTime = secondClearTime;
+
+        ControllerManager.GetInstance().ThirdName = thirdUserName;
+        ControllerManager.GetInstance().ThirdClearTime = thirdClearTime;
     }
 
     public void SaveData(string _name, string _clearTime, string _secondName,
@@ -116,6 +140,6 @@ public class DataManager : MonoBehaviour
         byte[] data = Encoding.UTF8.GetBytes(JsonData);
 
         fileStream.Write(data, 0, data.Length);
-        //fileStream.Close();
+        fileStream.Close();
     }
 }

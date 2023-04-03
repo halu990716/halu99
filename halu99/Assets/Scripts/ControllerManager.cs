@@ -25,11 +25,12 @@ public class ControllerManager
     public int MissileHp = 1;
     public float AttackSpeed = 1;
     public int AttackCount = 1;
+    public int MissileCount = 0;
 
     public int EnemyHp = 30;
 
-    public int BossHp = 30;
-
+    public int BossHp = 30000;
+    public bool BossDie = false;
 
     public string UserName;
 

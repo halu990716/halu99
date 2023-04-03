@@ -1,1 +1,8 @@
-{"BastName":"","BastClearTime":"7","SecondName":"2","SecondClearTime":"2345","ThirdName":"3","ThirdClearTime":"3456"}
+{
+  "BastName": "NULL",
+  "BastClearTime": "9999",
+  "SecondName": "NULL",
+  "SecondClearTime": "9999",
+  "ThirdName": "NULL",
+  "ThirdClearTime": "9999"
+}
