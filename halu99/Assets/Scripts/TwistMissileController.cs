@@ -55,6 +55,8 @@ public class TwistMissileController : MonoBehaviour
             Obj.transform.position = transform.position;
             Obj.transform.name = "Hit";
 
+            SoundManager.Instance.soundManager("EnemyMissile");
+
             Destroy(gameObject, 0.016f);
         }
 

@@ -230,6 +230,8 @@ public class PlayerController : MonoBehaviour
 
             Obj.transform.position = transform.position;
 
+            SoundManager.Instance.soundManager("PlayerDie");
+
             Destroy(gameObject, 0.016f);
         }
     }

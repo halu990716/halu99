@@ -86,6 +86,9 @@ public class BossMissileController : MonoBehaviour
         if (collision.transform.tag == "Wall")
             Destroy(this.gameObject, 0.016f);
 
+        if (collision.transform.tag == "Player")
+            SoundManager.Instance.soundManager("MissileAudio");
+
         // ** 총알의 충돌 횟수가 0이 되면 총알 삭제.
         if (Hp == 0)
         Destroy(this.gameObject, 0.016f);

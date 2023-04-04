@@ -81,6 +81,8 @@ public class ItemController : MonoBehaviour
                     break;
             }
 
+            SoundManager.Instance.soundManager("getItem");
+
             Destroy(this.gameObject, 0.016f);
         }
         if (collision.transform.tag == "Wall")

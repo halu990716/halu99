@@ -18,8 +18,6 @@ public class UiController : MonoBehaviour
     private Animator TutorialBoardAni;
 
     private AudioSource audioSource;
-    public AudioClip Click;
-    public AudioClip Swipe;
 
     private bool GameStartActive;
     private bool TutorialBoardCheck;
@@ -66,10 +64,12 @@ public class UiController : MonoBehaviour
         ControllerManager.GetInstance().MissileCount = 0;
         ControllerManager.GetInstance().EnemyHp = 30;
 
-        ControllerManager.GetInstance().BossHp = 30;
+        ControllerManager.GetInstance().BossHp = 30000;
         ControllerManager.GetInstance().BossDie = false;
 
-        audioSource.PlayOneShot(Click);
+        //audioSource.PlayOneShot(Click);
+        SoundManager.Instance.soundManager("Click");
+        
     }
 
     public void onTitleTutorial()
@@ -80,7 +80,7 @@ public class UiController : MonoBehaviour
 
         TutorialBoardAni.SetBool("Move", TutorialBoardCheck);
 
-        audioSource.PlayOneShot(Click);
+        SoundManager.Instance.soundManager("Click");
 
     }
 
@@ -92,7 +92,8 @@ public class UiController : MonoBehaviour
 
         TutorialBoardAni.SetBool("Move", TutorialBoardCheck);
 
-        audioSource.PlayOneShot(Click);
+        SoundManager.Instance.soundManager("Click");
+
 
     }
 
@@ -100,35 +101,37 @@ public class UiController : MonoBehaviour
     {
         ControllerManager.GetInstance().Player_List = 1;
 
-        audioSource.PlayOneShot(Click);
+        SoundManager.Instance.soundManager("Click");
 
-        StartCoroutine(WaitLoadScene());
+        SceneManager.LoadScene("Game");
     }
 
     public void onPlayer2()
     {
         ControllerManager.GetInstance().Player_List = 2;
 
-        audioSource.PlayOneShot(Click);
+        SoundManager.Instance.soundManager("Click");
 
-        StartCoroutine(WaitLoadScene());
+        SceneManager.LoadScene("Game");
     }
 
     public void onPlayer3()
     {
         ControllerManager.GetInstance().Player_List = 3;
 
-        audioSource.PlayOneShot(Click);
+        SoundManager.Instance.soundManager("Click");
 
-        StartCoroutine(WaitLoadScene());
+        SceneManager.LoadScene("Game");
+
     }
     public void onPlayer4()
     {
         ControllerManager.GetInstance().Player_List = 4;
 
-        audioSource.PlayOneShot(Click);
+        SoundManager.Instance.soundManager("Click");
 
-        StartCoroutine(WaitLoadScene());
+        SceneManager.LoadScene("Game");
+
     }
 
     private void TitleSwich()
@@ -144,15 +147,8 @@ public class UiController : MonoBehaviour
     {
         ControllerManager.GetInstance().RankButton = true;
 
-        audioSource.PlayOneShot(Click);
+        SoundManager.Instance.soundManager("Click");
 
     }
 
-    IEnumerator WaitLoadScene()
-    {
-        yield return new WaitForSeconds(0.25f);
-
-        SceneManager.LoadScene("Game");
-
-    }
 }

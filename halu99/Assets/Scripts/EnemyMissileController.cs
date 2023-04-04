@@ -50,6 +50,8 @@ public class EnemyMissileController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Hp--;
+        if (collision.transform.tag == "Player")
+            SoundManager.Instance.soundManager("EnemyMissile");
 
         if (Hp <= 0)
         {

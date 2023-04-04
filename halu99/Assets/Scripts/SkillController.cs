@@ -26,6 +26,8 @@ public class SkillController : MonoBehaviour
 
     IEnumerator Skill()
     {
+        SoundManager.Instance.soundManager("Skill");
+
         while (true)
         {
             // 이펙트효과 복제.

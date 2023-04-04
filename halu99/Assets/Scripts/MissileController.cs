@@ -18,6 +18,9 @@ public class MissileController : MonoBehaviour
 
     private GameObject Parent;
 
+    private AudioSource audioSource;
+    public AudioClip MissileAudio;
+
     void Start()
     {
         // 속도의 초기값
@@ -30,6 +33,9 @@ public class MissileController : MonoBehaviour
         MissileHp = ControllerManager.GetInstance().MissileHp;
 
         Parent = GameObject.Find("EnemyList");
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+
     }
 
     void Update()
@@ -54,6 +60,9 @@ public class MissileController : MonoBehaviour
 
             Vector3 pos = Camera.main.WorldToScreenPoint(collision.transform.position);
             DamageTextManager.Instance.CreateDamageText(pos, Damage);
+
+            //audioSource.PlayOneShot(MissileAudio);
+            SoundManager.Instance.soundManager("MissileAudio");
 
         }
         // ** collision = 충돌한 대상.

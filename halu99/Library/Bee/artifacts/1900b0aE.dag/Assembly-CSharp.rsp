@@ -382,6 +382,7 @@
 "Assets/Scripts/PlayerController.cs"
 "Assets/Scripts/PlayerManager.cs"
 "Assets/Scripts/SkillController.cs"
+"Assets/Scripts/SoundManager.cs"
 "Assets/Scripts/TwistMissileController.cs"
 "Assets/Scripts/Ui/BossHPvar.cs"
 "Assets/Scripts/Ui/ClearBoardController.cs"

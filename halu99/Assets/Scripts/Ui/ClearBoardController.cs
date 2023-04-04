@@ -28,8 +28,8 @@ public class ClearBoardController : MonoBehaviour
     {
         Ani = GetComponent<Animator>();
 
-        audioSource = GetComponent<AudioSource>();
-
+        audioSource = gameObject.GetComponent<AudioSource>();
+        //Click = Resources.Load("Sounds/Click") as AudioClip;
     }
 
     void Start()
@@ -86,16 +86,18 @@ public class ClearBoardController : MonoBehaviour
     {
         ControllerManager.GetInstance().RankButton = false;
 
-        audioSource.Play();
+        SoundManager.Instance.soundManager("Click");
 
     }
 
     public void OnHomeButton()
     {
         ControllerManager.GetInstance().BossDie = false;
+
+        SoundManager.Instance.soundManager("Click");
+
         SceneManager.LoadScene("Main menu");
 
-        audioSource.Play();
-
     }
+
 }

@@ -10,6 +10,8 @@ public class ResultNameInput : MonoBehaviour
     public GameObject Loding;
     public GameObject input;
 
+    private AudioSource audioSource;
+
     public InputField inputField;
     private string playerName = null;
 
@@ -17,6 +19,9 @@ public class ResultNameInput : MonoBehaviour
     {
         //HomeButton = GameObject.Find("Palyer Name Input");
         playerName = inputField.GetComponent<InputField>().text;
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+
     }
 
 
@@ -39,6 +44,8 @@ public class ResultNameInput : MonoBehaviour
         ControllerManager.GetInstance().UserName = playerName;
         ControllerManager.GetInstance().UpDateRank = true;
         //GameManager.instance.ScoreSet(GameManager.instance.score, playerName);
+
+        SoundManager.Instance.soundManager("Click");
 
         StartCoroutine(LodingWait());
     }
