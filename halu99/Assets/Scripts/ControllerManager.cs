@@ -36,7 +36,7 @@ public class ControllerManager
 
     public int EnemyHp = 30;
 
-    public int BossHp = 30000;
+    public int BossHp = 30;
     public bool BossDie = false;
 
     public string UserName;

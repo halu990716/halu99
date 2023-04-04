@@ -64,7 +64,7 @@ public class EnemyManager : MonoBehaviour
             {
                 rand = Random.Range(Enemy_1_A, Enemy_1_D + 1);
 
-                if (i == 100 && !Boss)
+                if (i == 1 && !Boss)
                 {
                     Boss = true;
 

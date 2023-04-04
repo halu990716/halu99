@@ -33,7 +33,6 @@ public class TimerController : MonoBehaviour
 
         if (ControllerManager.GetInstance().BossDie)
         {
-            ControllerManager.GetInstance().BossDie = false;
             Destroy(gameObject, 0.016f);
         }
     }

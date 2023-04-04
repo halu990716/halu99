@@ -79,7 +79,9 @@ public class DataManager : MonoBehaviour
 
     void Update()
     {
- 
+        print(ControllerManager.GetInstance().BossDie);
+        print(ControllerManager.GetInstance().RankButton);
+
     }
 
     public void UpDateRank()

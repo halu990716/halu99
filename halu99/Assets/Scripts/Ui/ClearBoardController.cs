@@ -48,17 +48,12 @@ public class ClearBoardController : MonoBehaviour
     {
         UpRank();
 
-        if (ControllerManager.GetInstance().BossDie) 
+        if (ControllerManager.GetInstance().BossDie || ControllerManager.GetInstance().RankButton) 
         {
             Ani.SetBool("Move", true);
         }
-
-        if (ControllerManager.GetInstance().RankButton)
-        {
-            Ani.SetBool("Move", true);
-        }
-
-        if (!ControllerManager.GetInstance().RankButton)
+        
+        if (!ControllerManager.GetInstance().RankButton && !ControllerManager.GetInstance().BossDie)
         {
             Ani.SetBool("Move", false);
         }
@@ -91,6 +86,8 @@ public class ClearBoardController : MonoBehaviour
 
     public void OnHomeButton()
     {
+        ControllerManager.GetInstance().BossDie = false;
         SceneManager.LoadScene("Main menu");
+
     }
 }
