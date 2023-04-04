@@ -19,6 +19,7 @@ public class ClearBoardController : MonoBehaviour
 
     private Animator Ani;
 
+    private AudioSource audioSource;
 
     private int Time;
 
@@ -26,6 +27,9 @@ public class ClearBoardController : MonoBehaviour
     private void Awake()
     {
         Ani = GetComponent<Animator>();
+
+        audioSource = GetComponent<AudioSource>();
+
     }
 
     void Start()
@@ -76,18 +80,22 @@ public class ClearBoardController : MonoBehaviour
 
         Time = ControllerManager.GetInstance().ClearTime;
         ClearTime.text = (Time / 60).ToString("D2") + ":" + (Time % 60).ToString("D2");
-
     }
 
     public void OnBackButton()
     {
         ControllerManager.GetInstance().RankButton = false;
+
+        audioSource.Play();
+
     }
 
     public void OnHomeButton()
     {
         ControllerManager.GetInstance().BossDie = false;
         SceneManager.LoadScene("Main menu");
+
+        audioSource.Play();
 
     }
 }

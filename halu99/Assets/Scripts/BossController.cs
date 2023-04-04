@@ -324,7 +324,7 @@ public class BossController : MonoBehaviour
         Die();
 
     }
-
+    
     private void Die()
     {
         if (HP <= 0)
