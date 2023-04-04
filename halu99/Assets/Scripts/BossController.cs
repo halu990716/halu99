@@ -229,13 +229,13 @@ public class BossController : MonoBehaviour
         }
     }
 
+    
     public IEnumerator ExplosionPattern(float _angle, int _count, bool _option = true)
     {
         yield return new WaitForSeconds(1.0f);
 
         GameObject ParentObj = new GameObject("Missile");
 
-        //parentObj.AddComponent<MyGizmo>();
         SpriteRenderer renderer = ParentObj.AddComponent<SpriteRenderer>();
         renderer.sprite = sprite;
 
@@ -335,6 +335,8 @@ public class BossController : MonoBehaviour
             ControllerManager.GetInstance().BossDie = true;
 
             ControllerManager.GetInstance().ClearTime = sTimer.timer;
+
+            SoundManager.Instance.soundManager("Clear");
 
             Destroy(gameObject, 0.016f);
 

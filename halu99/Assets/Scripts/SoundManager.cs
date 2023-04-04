@@ -21,6 +21,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip getItem;
     public AudioClip Click;
     public AudioClip Skill;
+    public AudioClip Clear;
 
     public void soundManager(string audioName)
     {
@@ -54,6 +55,11 @@ public class SoundManager : MonoBehaviour
         if (audioName == "Skill")
         {
             GetComponent<AudioSource>().PlayOneShot(Skill);
+        }
+
+        if (audioName == "Clear")
+        {
+            GetComponent<AudioSource>().PlayOneShot(Clear);
         }
     }
 }
