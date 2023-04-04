@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
     {
         Player_List = ControllerManager.GetInstance().Player_List;
         Parent = new GameObject("Missile");
-        DieFx = Resources.Load("Prefabs/FX/Magic Hit") as GameObject;
+        DieFx = Resources.Load("Prefabs/FX/DieFx") as GameObject;
 
         // player 의 spriteRenderer 받아온다.
         playerRenderer = this.GetComponent<SpriteRenderer>();

@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\ControllerManager.cs" />
     <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Ui\BossHPvar.cs" />
+    <Compile Include="Assets\FX\Scripts\CFXR_Demo.cs" />
     <Compile Include="Assets\FX\Scripts\CFX_LightIntensityFade.cs" />
     <Compile Include="Assets\Scripts\Ui\DamageTextManager.cs" />
     <Compile Include="Assets\box\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_AutoRotate.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Assets\Scripts\TwistMissileController.cs" />
     <Compile Include="Assets\box\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_RandomDirectionTranslate.cs" />
     <Compile Include="Assets\Scripts\Ui\GameOverBoardController.cs" />
+    <Compile Include="Assets\FX\Scripts\CFXR_Effect.cs" />
     <Compile Include="Assets\Scripts\Ui\DamageTextController.cs" />
     <Compile Include="Assets\Scripts\BossController.cs" />
     <Compile Include="Assets\box\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_Translate.cs" />
@@ -91,6 +93,7 @@
     <Compile Include="Assets\box\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_New.cs" />
     <Compile Include="Assets\box\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightFlicker.cs" />
     <Compile Include="Assets\Scripts\Ui\PlayerHPvar.cs" />
+    <Compile Include="Assets\FX\Scripts\CFXR_Effect.CameraShake.cs" />
     <Compile Include="Assets\Scripts\Ui\ResultNameInput.cs" />
   </ItemGroup>
   <ItemGroup>
