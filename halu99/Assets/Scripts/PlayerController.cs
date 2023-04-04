@@ -51,6 +51,8 @@ public class PlayerController : MonoBehaviour
     // 복사할 미사일 원본
     private GameObject MissilePrefab;
 
+    private GameObject DieFx;
+
     // 복제된 총알의 저장공간.
     private List<GameObject> Missile = new List<GameObject>();
 
@@ -58,6 +60,7 @@ public class PlayerController : MonoBehaviour
     {
         Player_List = ControllerManager.GetInstance().Player_List;
         Parent = new GameObject("Missile");
+        DieFx = Resources.Load("Prefabs/FX/Magic Hit") as GameObject;
 
         // player 의 spriteRenderer 받아온다.
         playerRenderer = this.GetComponent<SpriteRenderer>();
@@ -72,19 +75,21 @@ public class PlayerController : MonoBehaviour
 
             case Ship_1_B:
                 MissilePrefab = Resources.Load("Prefabs/Player/Missile/Missile_B") as GameObject;
-                ControllerManager.GetInstance().MissileHp++;
+                ControllerManager.GetInstance().SkillCool = 0.2f;
 
                 break;
 
             case Ship_1_C:
                 MissilePrefab = Resources.Load("Prefabs/Player/Missile/Missile_C") as GameObject;
+                ControllerManager.GetInstance().MaxMissileDamage *= 2;
                 ControllerManager.GetInstance().MissileDamage += 10;
+                ControllerManager.GetInstance().Ship_C = true;
 
                 break;
 
             case Ship_1_D:
                 MissilePrefab = Resources.Load("Prefabs/Player/Missile/Missile_D") as GameObject;
-                ControllerManager.GetInstance().AttackSpeed -= 0.3f;
+                ControllerManager.GetInstance().AttackSpeed -= 0.5f;
 
                 break;
         }
@@ -216,6 +221,16 @@ public class PlayerController : MonoBehaviour
         if (collision.transform.tag == "EnemyMissile" && !WaitHit)
         {
             OnHit();
+        }
+
+        if (HP <= 0)
+        {
+            ControllerManager.GetInstance().Player_Die = true;
+            GameObject Obj = Instantiate(DieFx);
+
+            Obj.transform.position = transform.position;
+
+            Destroy(gameObject, 0.016f);
         }
     }
 

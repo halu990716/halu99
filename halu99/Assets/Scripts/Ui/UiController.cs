@@ -12,6 +12,7 @@ public class UiController : MonoBehaviour
     public GameObject PlayerList;
     private GameObject Tutorial;
     private GameObject TutorialBoard;
+    private GameObject rankButton;
 
     private Animator TutorialBoardAni;
 
@@ -25,6 +26,7 @@ public class UiController : MonoBehaviour
         GameStart = GameObject.Find("Game Start Button");
         Tutorial = GameObject.Find("Tutorial");
         TutorialBoard = GameObject.Find("Tutorial Board");
+        rankButton = GameObject.Find("Rank Button");
 
         TutorialBoardAni = TutorialBoard.GetComponent<Animator>();
     }
@@ -44,8 +46,14 @@ public class UiController : MonoBehaviour
 
         ControllerManager.GetInstance().Player_MaxHp = 3;
         ControllerManager.GetInstance().Player_HP = 3;
+        ControllerManager.GetInstance().Player_Die = false;
+
+        ControllerManager.GetInstance().SkillCool = 0.1f;
+
+        ControllerManager.GetInstance().Ship_C = false;
 
         ControllerManager.GetInstance().MissileDamage = 10;
+        ControllerManager.GetInstance().MaxMissileDamage = 50;
         ControllerManager.GetInstance().MissileHp = 1;
         ControllerManager.GetInstance().AttackSpeed = 1;
         ControllerManager.GetInstance().AttackCount = 1;
@@ -108,5 +116,11 @@ public class UiController : MonoBehaviour
         Titel.SetActive(GameStartActive);
         GameStart.SetActive(GameStartActive);
         Tutorial.SetActive(GameStartActive);
+        rankButton.SetActive(GameStartActive);
+    }
+
+    public void RankButton()
+    {
+        ControllerManager.GetInstance().RankButton = true;
     }
 }

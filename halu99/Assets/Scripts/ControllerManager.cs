@@ -13,15 +13,22 @@ public class ControllerManager
             Instance = new ControllerManager();
         return Instance;
     }
+    public bool RankButton = false;
+
     public int Rand = 1;
 
     public int Player_List = 1;
 
     public int Player_MaxHp = 3;
     public int Player_HP = 3;
+    public bool Player_Die = false;
 
+    public float SkillCool = 0.1f;
 
+    public bool Ship_C = false;
     public int MissileDamage = 10;
+    public int MaxMissileDamage = 50;
+
     public int MissileHp = 1;
     public float AttackSpeed = 1;
     public int AttackCount = 1;

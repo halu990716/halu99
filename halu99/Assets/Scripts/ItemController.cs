@@ -60,8 +60,15 @@ public class ItemController : MonoBehaviour
                     break;
 
                 case Pickup_1_C:
-                    if (ControllerManager.GetInstance().MissileDamage < 50)
-                        ControllerManager.GetInstance().MissileDamage += 10;
+                    if (ControllerManager.GetInstance().MissileDamage < ControllerManager.GetInstance().MaxMissileDamage)
+                    {
+                        if (!ControllerManager.GetInstance().Ship_C)
+                        {
+                            ControllerManager.GetInstance().MissileDamage += 10;
+                        }
+                        else
+                            ControllerManager.GetInstance().MissileDamage += 20;
+                    }
                     break;
 
                 case Pickup_1_D:

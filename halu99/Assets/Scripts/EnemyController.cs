@@ -56,6 +56,9 @@ public class EnemyController : MonoBehaviour
         {
             transform.position -= Movement * Time.deltaTime;
         }
+
+        if(ControllerManager.GetInstance().Player_Die)
+            Destroy(gameObject, 0.016f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

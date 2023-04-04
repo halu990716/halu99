@@ -42,13 +42,20 @@ public class MissileController : MonoBehaviour
         // 충돌횟수 차감.
         --MissileHp;
 
-        // 이펙트효과 복제.
-        GameObject Obj = Instantiate(fxPrefab);
+        if (collision.tag == "Enemy")
+        {
 
-        // 이펙트 효과의 위치를 지정
-        Obj.transform.position = transform.position;
-        Obj.transform.parent = Parent.transform;
+            // 이펙트효과 복제.
+            GameObject Obj = Instantiate(fxPrefab);
 
+            // 이펙트 효과의 위치를 지정
+            Obj.transform.position = transform.position;
+            Obj.transform.parent = Parent.transform;
+
+            Vector3 pos = Camera.main.WorldToScreenPoint(collision.transform.position);
+            DamageTextManager.Instance.CreateDamageText(pos, Damage);
+
+        }
         // ** collision = 충돌한 대상.
         // ** 충돌한 대상을 삭제한다.
         if (collision.transform.tag == "Wall")

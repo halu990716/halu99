@@ -35,13 +35,13 @@ public class SkillUIController : MonoBehaviour
         //for (int i = 0; i < Buttons.Count; ++i)
         //    ButtonsImages.Add(Buttons[i].GetComponent<Image>());
 
-        CoolDown = 0.1f;
+        CoolDown = ControllerManager.GetInstance().SkillCool;
         Cool = false;
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && !Cool)
+        if(Input.GetKeyDown(KeyCode.Space) && !Cool && !ControllerManager.GetInstance().Player_Die)
         {
             image.fillAmount = 0;
             Cool = true;

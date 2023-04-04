@@ -46,4 +46,12 @@ public class SkillController : MonoBehaviour
         Destroy(this.gameObject, 0.016f);
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        int Damage = 10;
+
+        Vector3 pos = Camera.main.WorldToScreenPoint(collision.transform.position);
+        DamageTextManager.Instance.CreateDamageText(pos, Damage);
+    }
+
 }

@@ -51,7 +51,16 @@ public class ClearBoardController : MonoBehaviour
         if (ControllerManager.GetInstance().BossDie) 
         {
             Ani.SetBool("Move", true);
+        }
 
+        if (ControllerManager.GetInstance().RankButton)
+        {
+            Ani.SetBool("Move", true);
+        }
+
+        if (!ControllerManager.GetInstance().RankButton)
+        {
+            Ani.SetBool("Move", false);
         }
     }
 
@@ -73,6 +82,11 @@ public class ClearBoardController : MonoBehaviour
         Time = ControllerManager.GetInstance().ClearTime;
         ClearTime.text = (Time / 60).ToString("D2") + ":" + (Time % 60).ToString("D2");
 
+    }
+
+    public void OnBackButton()
+    {
+        ControllerManager.GetInstance().RankButton = false;
     }
 
     public void OnHomeButton()
