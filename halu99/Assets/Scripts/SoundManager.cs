@@ -54,12 +54,12 @@ public class SoundManager : MonoBehaviour
 
         if (audioName == "Skill")
         {
-            GetComponent<AudioSource>().PlayOneShot(Skill);
+            GetComponent<AudioSource>().PlayOneShot(Skill, 0.3f);
         }
 
         if (audioName == "Clear")
         {
-            GetComponent<AudioSource>().PlayOneShot(Clear);
+            GetComponent<AudioSource>().PlayOneShot(Clear, 0.3f);
         }
     }
 }

@@ -92,7 +92,7 @@ public class BossController : MonoBehaviour
                     break;
 
                 case Pattern.Explosion:
-                    StartCoroutine(ExplosionPattern(5.0f, (int)(360 / 5.0f)));
+                    StartCoroutine(ExplosionPattern());
                     StartCoroutine(PatternPositionWait());
                     PatternPosition = 0.0f;
                     pattern = false;
@@ -105,7 +105,7 @@ public class BossController : MonoBehaviour
         }
     }
 
-    private IEnumerator GetScrewPattern(bool _option = false)
+    private IEnumerator GetScrewPattern()
     {
         for (int j = 0; j < 3; j++)
         {
@@ -117,8 +117,6 @@ public class BossController : MonoBehaviour
             {
                 GameObject Obj = Instantiate(BossMissile);
                 BossMissileController controller = Obj.GetComponent<BossMissileController>();
-
-                controller.Option = _option;
 
                 _angle += rand;
 
@@ -230,51 +228,32 @@ public class BossController : MonoBehaviour
     }
 
     
-    public IEnumerator ExplosionPattern(float _angle, int _count, bool _option = true)
+    public IEnumerator ExplosionPattern()
     {
         yield return new WaitForSeconds(1.0f);
 
-        GameObject ParentObj = new GameObject("Missile");
+        float rand = UnityEngine.Random.Range(7.0f, 10.0f);
+        float _angle = rand;
 
-        SpriteRenderer renderer = ParentObj.AddComponent<SpriteRenderer>();
-        renderer.sprite = sprite;
-
-        BossMissileController controll = ParentObj.AddComponent<BossMissileController>();
-
-        controll.Option = _option;
-
-        //controll.Direction = (GameObject.Find("Player").transform.position - transform.position);
-
-
-        ParentObj.transform.position = transform.position;
-
-        yield return new WaitForSeconds(0.5f);
-
-        Vector3 pos = ParentObj.transform.position;
-
-        Destroy(ParentObj);
-
-
+        int _count = (int)(360 / rand);
         for (int i = 0; i < _count; ++i)
         {
-            GameObject Obj = Instantiate(EnemyMissile);
-
+            GameObject Obj = Instantiate(BossMissile);
             BossMissileController controller = Obj.GetComponent<BossMissileController>();
 
-            controller.Option = _option;
-
-            _angle += 15.0f;
+            _angle += rand;
 
             controller.Direction = new Vector3(
                 Mathf.Cos(_angle * 3.141592f / 180),
                 Mathf.Sin(_angle * 3.141592f / 180),
-                0.0f) * 15 + transform.position;
+                0.0f) * 5;
 
 
+            Obj.transform.position = transform.position;
             Obj.transform.parent = EnemyManager.transform;
-            Obj.transform.position = pos;
 
             MissiletList.Add(Obj);
+
         }
     }
 

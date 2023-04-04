@@ -29,7 +29,7 @@ public class BossMissileController : MonoBehaviour
     private void Start()
     {
         // 속도 초기값
-        Speed = Option ? 0.5f : 1.75f;
+        Speed = 1.75f;
         Hp = 1;
         // 충돌 횟수를 3으로 지정한다
         //hp = 3;

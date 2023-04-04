@@ -19,8 +19,6 @@ public class ClearBoardController : MonoBehaviour
 
     private Animator Ani;
 
-    private AudioSource audioSource;
-
     private int Time;
 
 
@@ -28,7 +26,6 @@ public class ClearBoardController : MonoBehaviour
     {
         Ani = GetComponent<Animator>();
 
-        audioSource = gameObject.GetComponent<AudioSource>();
         //Click = Resources.Load("Sounds/Click") as AudioClip;
     }
 
