@@ -32,6 +32,18 @@ class DataForm
 
 public class DataManager : MonoBehaviour
 {
+    public static DataManager Instance;
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
     private string bastUserName;
     private int bastClearTime;
 
@@ -43,7 +55,7 @@ public class DataManager : MonoBehaviour
 
     private GameObject ClearBoard;
 
-    void Awake()
+    private void Start()
     {
         var jsonData = Resources.Load<TextAsset>("saveFile/Data");
         DataForm form = JsonUtility.FromJson<DataForm>(jsonData.ToString());
@@ -56,7 +68,7 @@ public class DataManager : MonoBehaviour
 
         //thirdUserName = "3";
         //thirdClearTime = 3456;
-            
+
         bastUserName = form.BastName;
         bastClearTime = int.Parse(form.BastClearTime);
 
@@ -74,57 +86,56 @@ public class DataManager : MonoBehaviour
 
         ControllerManager.GetInstance().ThirdName = thirdUserName;
         ControllerManager.GetInstance().ThirdClearTime = thirdClearTime;
-
     }
 
     void Update()
     {
-
-    }
-
-    public void UpDateRank()
-    {
-        if (bastClearTime > ControllerManager.GetInstance().ClearTime)
+        if (ControllerManager.GetInstance().UpDateRank)
         {
-            thirdUserName = secondUserName;
-            thirdClearTime = secondClearTime;
+            ControllerManager.GetInstance().UpDateRank = false;
 
-            secondUserName = bastUserName;
-            secondClearTime = bastClearTime;
-         
-            bastUserName = ControllerManager.GetInstance().UserName;
-            bastClearTime = ControllerManager.GetInstance().ClearTime;
-            SaveData(bastUserName, bastClearTime.ToString(), secondUserName,
-                secondClearTime.ToString(), thirdUserName, thirdClearTime.ToString());
+            if (bastClearTime > ControllerManager.GetInstance().ClearTime)
+            {
+                thirdUserName = secondUserName;
+                thirdClearTime = secondClearTime;
+
+                secondUserName = bastUserName;
+                secondClearTime = bastClearTime;
+
+                bastUserName = ControllerManager.GetInstance().UserName;
+                bastClearTime = ControllerManager.GetInstance().ClearTime;
+                SaveData(bastUserName, bastClearTime.ToString(), secondUserName,
+                    secondClearTime.ToString(), thirdUserName, thirdClearTime.ToString());
+            }
+
+            else if (secondClearTime > ControllerManager.GetInstance().ClearTime)
+            {
+                thirdUserName = secondUserName;
+                thirdClearTime = secondClearTime;
+
+                secondUserName = ControllerManager.GetInstance().UserName;
+                secondClearTime = ControllerManager.GetInstance().ClearTime;
+                SaveData(bastUserName, bastClearTime.ToString(), secondUserName,
+                    secondClearTime.ToString(), thirdUserName, thirdClearTime.ToString());
+            }
+
+            else if (thirdClearTime > ControllerManager.GetInstance().ClearTime)
+            {
+                thirdUserName = ControllerManager.GetInstance().UserName;
+                thirdClearTime = ControllerManager.GetInstance().ClearTime;
+                SaveData(bastUserName, bastClearTime.ToString(), secondUserName,
+                    secondClearTime.ToString(), thirdUserName, thirdClearTime.ToString());
+            }
+
+            ControllerManager.GetInstance().BastUserName = bastUserName;
+            ControllerManager.GetInstance().BastClearTime = bastClearTime;
+
+            ControllerManager.GetInstance().SecondUserName = secondUserName;
+            ControllerManager.GetInstance().SecondClearTime = secondClearTime;
+
+            ControllerManager.GetInstance().ThirdName = thirdUserName;
+            ControllerManager.GetInstance().ThirdClearTime = thirdClearTime;
         }
-
-        else if (secondClearTime > ControllerManager.GetInstance().ClearTime)
-        {
-            thirdUserName = secondUserName;
-            thirdClearTime = secondClearTime;
-
-            secondUserName = ControllerManager.GetInstance().UserName;
-            secondClearTime = ControllerManager.GetInstance().ClearTime;
-            SaveData(bastUserName, bastClearTime.ToString(), secondUserName,
-                secondClearTime.ToString(), thirdUserName, thirdClearTime.ToString());
-        }
-
-        else if (thirdClearTime > ControllerManager.GetInstance().ClearTime)
-        {
-            thirdUserName = ControllerManager.GetInstance().UserName;
-            thirdClearTime = ControllerManager.GetInstance().ClearTime;
-            SaveData(bastUserName, bastClearTime.ToString(), secondUserName,
-                secondClearTime.ToString(), thirdUserName, thirdClearTime.ToString());
-        }
-
-        ControllerManager.GetInstance().BastUserName = bastUserName;
-        ControllerManager.GetInstance().BastClearTime = bastClearTime;
-
-        ControllerManager.GetInstance().SecondUserName = secondUserName;
-        ControllerManager.GetInstance().SecondClearTime = secondClearTime;
-
-        ControllerManager.GetInstance().ThirdName = thirdUserName;
-        ControllerManager.GetInstance().ThirdClearTime = thirdClearTime;
     }
 
     public void SaveData(string _name, string _clearTime, string _secondName,

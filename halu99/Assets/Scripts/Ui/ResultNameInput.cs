@@ -30,11 +30,14 @@ public class ResultNameInput : MonoBehaviour
     public void InputName()
     {
         playerName = inputField.text;
+
         PlayerPrefs.SetString("CurrentPlayerName", playerName);
 
         Loding.SetActive(true);
         input.SetActive(false);
+
         ControllerManager.GetInstance().UserName = playerName;
+        ControllerManager.GetInstance().UpDateRank = true;
         //GameManager.instance.ScoreSet(GameManager.instance.score, playerName);
 
         StartCoroutine(LodingWait());

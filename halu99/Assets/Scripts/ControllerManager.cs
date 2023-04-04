@@ -14,6 +14,7 @@ public class ControllerManager
         return Instance;
     }
     public bool RankButton = false;
+    public bool UpDateRank = true;
 
     public int Rand = 1;
 
