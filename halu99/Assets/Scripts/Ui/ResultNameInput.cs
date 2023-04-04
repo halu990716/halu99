@@ -7,6 +7,8 @@ public class ResultNameInput : MonoBehaviour
 {
     public GameObject PalyerNameInput;
     public GameObject HomeButton;
+    public GameObject Loding;
+    public GameObject input;
 
     public InputField inputField;
     private string playerName = null;
@@ -30,9 +32,20 @@ public class ResultNameInput : MonoBehaviour
         playerName = inputField.text;
         PlayerPrefs.SetString("CurrentPlayerName", playerName);
 
-        PalyerNameInput.SetActive(false);
-        HomeButton.SetActive(true);
+        Loding.SetActive(true);
+        input.SetActive(false);
         ControllerManager.GetInstance().UserName = playerName;
         //GameManager.instance.ScoreSet(GameManager.instance.score, playerName);
+
+        StartCoroutine(LodingWait());
+    }
+
+    IEnumerator LodingWait()
+    {
+        yield return new WaitForSeconds(3.0f);
+
+        Loding.SetActive(false);
+        PalyerNameInput.SetActive(false);
+        HomeButton.SetActive(true);
     }
 }

@@ -57,7 +57,7 @@ public class EnemyController : MonoBehaviour
             transform.position -= Movement * Time.deltaTime;
         }
 
-        if(ControllerManager.GetInstance().Player_Die)
+        if (ControllerManager.GetInstance().Player_Die || ControllerManager.GetInstance().BossDie)
             Destroy(gameObject, 0.016f);
     }
 
