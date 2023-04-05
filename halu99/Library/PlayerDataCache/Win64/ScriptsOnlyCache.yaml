@@ -1371,4 +1371,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/Main menu.unity
   - Assets/Scenes/Game.unity
-  playerPath: C:/Users/SGA/Desktop/UnityBuild/halu99.exe
+  playerPath: C:/Users/SGA/Desktop/halu99/UnityBuild/halu99.exe
