@@ -79,14 +79,6 @@ public class ClearBoardController : MonoBehaviour
         ClearTime.text = (Time / 60).ToString("D2") + ":" + (Time % 60).ToString("D2");
     }
 
-    public void OnBackButton()
-    {
-        ControllerManager.GetInstance().RankButton = false;
-
-        SoundManager.Instance.soundManager("Click");
-
-    }
-
     public void OnHomeButton()
     {
         ControllerManager.GetInstance().BossDie = false;

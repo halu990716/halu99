@@ -14,6 +14,7 @@ public class UiController : MonoBehaviour
     private GameObject Tutorial;
     private GameObject TutorialBoard;
     private GameObject rankButton;
+    private GameObject GameQuitButton;
 
     private Animator TutorialBoardAni;
 
@@ -29,6 +30,7 @@ public class UiController : MonoBehaviour
         Tutorial = GameObject.Find("Tutorial");
         TutorialBoard = GameObject.Find("Tutorial Board");
         rankButton = GameObject.Find("Rank Button");
+        GameQuitButton = GameObject.Find("Game Quit Button");
 
         audioSource = gameObject.AddComponent<AudioSource>();
 
@@ -141,6 +143,7 @@ public class UiController : MonoBehaviour
         GameStart.SetActive(GameStartActive);
         Tutorial.SetActive(GameStartActive);
         rankButton.SetActive(GameStartActive);
+        GameQuitButton.SetActive(GameStartActive);
     }
 
     public void RankButton()
@@ -149,6 +152,23 @@ public class UiController : MonoBehaviour
 
         SoundManager.Instance.soundManager("Click");
 
+        TitleSwich();
     }
 
+    public void RankBackButton()
+    {
+        ControllerManager.GetInstance().RankButton = false;
+
+        SoundManager.Instance.soundManager("Click");
+
+        TitleSwich();
+
+    }
+
+    public void GameQuit()
+    {
+        SoundManager.Instance.soundManager("Click");
+
+        Application.Quit();
+    }
 }
