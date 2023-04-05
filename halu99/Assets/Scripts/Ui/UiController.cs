@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEditor.SceneManagement;
-
 public class UiController : MonoBehaviour
 {
     private GameObject Titel;
