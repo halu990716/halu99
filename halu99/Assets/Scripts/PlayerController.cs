@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Device;
-using static UnityEditor.PlayerSettings;
 
 public class PlayerController : MonoBehaviour
 {
