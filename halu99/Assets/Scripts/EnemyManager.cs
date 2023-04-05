@@ -151,7 +151,10 @@ public class EnemyManager : MonoBehaviour
     private void Update()
     {
         if (ControllerManager.GetInstance().BossDie)
+        {
+            BossAppear.SetActive(false);
             Destroy(gameObject, 0.016f);
+        }
     }
 
     IEnumerator bossAppear()
