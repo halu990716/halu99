@@ -28,12 +28,14 @@ public class EnemyManager : MonoBehaviour
     private GameObject prefab;
 
     public GameObject BossHpBar;
+    public GameObject BossAppear;
 
     private int rand;
 
     private float Wait;
 
     private bool Boss;
+    private bool Bossappear;
 
     private void Awake()
     {
@@ -46,6 +48,7 @@ public class EnemyManager : MonoBehaviour
             Wait = 1.5f;
 
             Boss = false;
+            Bossappear = false;
 
             // ** 씬이 변경되어도 계속 유지될 수 있게 해준다.
             //DontDestroyOnLoad(gameObject);
@@ -80,6 +83,8 @@ public class EnemyManager : MonoBehaviour
                     Obj.transform.parent = Parent.transform;
 
                     BossHpBar.SetActive(true);
+
+                    StartCoroutine(bossAppear());
 
                     Wait = 3.0f;
                 }
@@ -149,4 +154,15 @@ public class EnemyManager : MonoBehaviour
             Destroy(gameObject, 0.016f);
     }
 
+    IEnumerator bossAppear()
+    {
+        for (int i = 0; i < 6; ++i)
+        {
+            BossAppear.SetActive(!Bossappear);
+
+            Bossappear = !Bossappear;
+
+            yield return new WaitForSeconds(0.3f);
+        }
+    }
 }
