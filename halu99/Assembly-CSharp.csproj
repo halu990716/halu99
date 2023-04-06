@@ -103,19 +103,12 @@
     <None Include="Assets\box\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR Particle Ubershader.shader" />
     <None Include="Assets\box\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_SETTINGS.cginc" />
     <None Include="Assets\box\JMO Assets\Cartoon FX (legacy)\CartoonFX Free.txt" />
-    <None Include="Assets\box\StarlinkUI\Resources\English.txt" />
-    <None Include="Assets\box\StarlinkUI\Art\Starfield.shader" />
     <None Include="Assets\box\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR.cginc" />
-    <None Include="Assets\box\StarlinkUI\UI\Arimo20.txt" />
     <None Include="Assets\box\JMO Assets\Cartoon FX Remaster\Readme Cartoon FX Remaster FREE.txt" />
-    <None Include="Assets\box\StarlinkUI\UI\Medium.txt" />
     <None Include="Assets\box\JMO Assets\Cartoon FX Remaster\CFXR Prefabs\Texts\_Make your own text effect.txt" />
-    <None Include="Assets\box\Ships and Stations\Rendering Tip.txt" />
     <None Include="Assets\box\JMO Assets\Cartoon FX (legacy)\Shaders\CFXM_MobileParticleAdd_Alpha8.shader" />
     <None Include="Assets\box\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR Particle Procedural Ring.shader" />
     <None Include="Assets\box\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_URP.cginc" />
-    <None Include="Assets\box\StarlinkUI\Resources\Caps.txt" />
-    <None Include="Assets\box\StarlinkUI\UI\Large.txt" />
     <None Include="Assets\box\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR Particle Distortion.shader" />
   </ItemGroup>
   <ItemGroup>
