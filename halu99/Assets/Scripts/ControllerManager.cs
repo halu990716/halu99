@@ -14,7 +14,7 @@ public class ControllerManager
         return Instance;
     }
     public bool RankButton = false;
-    public bool ResetRank = false;
+    public bool UpLoadRank = false;
     public bool UpDateRank = true;
     public bool UpDateRankBoard = true;
 

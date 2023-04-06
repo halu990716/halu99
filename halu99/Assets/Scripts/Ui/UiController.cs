@@ -147,6 +147,7 @@ public class UiController : MonoBehaviour
     public void RankButton()
     {
         ControllerManager.GetInstance().RankButton = true;
+        ControllerManager.GetInstance().UpLoadRank = true;
 
         SoundManager.Instance.soundManager("Click");
 
@@ -176,6 +177,6 @@ public class UiController : MonoBehaviour
 
         PlayerPrefs.DeleteAll();
 
-        ControllerManager.GetInstance().ResetRank = true;
+        ControllerManager.GetInstance().UpLoadRank = true;
     }
 }

@@ -27,13 +27,15 @@ public class DataManager : MonoBehaviour
 
     private void Start()
     {
-        ResetRank();
+        UpLoadRank();
     }
 
     void Update()
     {
-        if (ControllerManager.GetInstance().ResetRank)
-            ResetRank();
+        if (ControllerManager.GetInstance().UpLoadRank)
+        {
+            UpLoadRank();
+        }
 
         if (ControllerManager.GetInstance().UpDateRank)
         {
@@ -89,7 +91,7 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    void ResetRank()
+    void UpLoadRank()
     {
         if(!PlayerPrefs.HasKey("BastUserName"))
         {

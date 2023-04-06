@@ -49,7 +49,6 @@ public class ClearBoardController : MonoBehaviour
     {
         if (ControllerManager.GetInstance().UpDateRankBoard)
         {
-            ControllerManager.GetInstance().UpDateRankBoard = false;
             UpRank();
         }
 
@@ -81,6 +80,8 @@ public class ClearBoardController : MonoBehaviour
 
         time = ControllerManager.GetInstance().ClearTime;
         ClearTime.text = (time / 60).ToString("D2") + ":" + (time % 60).ToString("D2");
+
+        ControllerManager.GetInstance().UpDateRankBoard = false;
     }
 
     public void OnHomeButton()
