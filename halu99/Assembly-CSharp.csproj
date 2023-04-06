@@ -66,6 +66,7 @@
     <Compile Include="Assets\box\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
     <Compile Include="Assets\Scripts\EnemyMissileController.cs" />
     <Compile Include="Assets\Scripts\ItemController.cs" />
+    <Compile Include="Assets\Scripts\GuidedMissileController.cs" />
     <Compile Include="Assets\box\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_RandomDir.cs" />
     <Compile Include="Assets\Scripts\BossMissileController.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />

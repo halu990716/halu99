@@ -18,8 +18,6 @@ public class MissileController : MonoBehaviour
 
     private GameObject Parent;
 
-    private AudioSource audioSource;
-    public AudioClip MissileAudio;
 
     void Start()
     {
@@ -34,7 +32,6 @@ public class MissileController : MonoBehaviour
 
         Parent = GameObject.Find("EnemyList");
 
-        audioSource = gameObject.AddComponent<AudioSource>();
 
     }
 

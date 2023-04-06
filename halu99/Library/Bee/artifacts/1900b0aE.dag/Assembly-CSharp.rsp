@@ -376,6 +376,7 @@
 "Assets/Scripts/EnemyController.cs"
 "Assets/Scripts/EnemyManager.cs"
 "Assets/Scripts/EnemyMissileController.cs"
+"Assets/Scripts/GuidedMissileController.cs"
 "Assets/Scripts/ItemController.cs"
 "Assets/Scripts/MissileController.cs"
 "Assets/Scripts/MyGizmo.cs"
