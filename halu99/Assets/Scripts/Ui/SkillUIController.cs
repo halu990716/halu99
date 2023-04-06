@@ -14,6 +14,8 @@ public class SkillUIController : MonoBehaviour
 
     private GameObject SkillPrefab;
 
+    public GameObject MenuBoard;
+
     public Image image;
 
     private float CoolDown;
@@ -71,6 +73,24 @@ public class SkillUIController : MonoBehaviour
         //}
 
         //Buttons[i].GetComponent<Button>().enabled = true;
+
+    }
+
+    public void MenuButton()
+    {
+        Time.timeScale = 0; //게임 일시정지
+
+        MenuBoard.SetActive(true);
+        SoundManager.Instance.soundManager("Click");
+
+    }
+
+    public void Continue()
+    {
+        Time.timeScale = 1;
+
+        MenuBoard.SetActive(false);
+        SoundManager.Instance.soundManager("Click");
 
     }
 }

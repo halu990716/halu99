@@ -80,6 +80,9 @@ ScriptsOnlyBuild:
     methodName: onTitleTutorial
   - assembly: Assembly-CSharp
     fullTypeName: UiController
+    methodName: ResetButton
+  - assembly: Assembly-CSharp
+    fullTypeName: UiController
     methodName: onCheckmark
   - assembly: Assembly-CSharp
     fullTypeName: UiController
@@ -102,6 +105,15 @@ ScriptsOnlyBuild:
   - assembly: Assembly-CSharp
     fullTypeName: UiController
     methodName: RankBackButton
+  - assembly: Assembly-CSharp
+    fullTypeName: ClearBoardController
+    methodName: OnHomeButton
+  - assembly: Assembly-CSharp
+    fullTypeName: SkillUIController
+    methodName: Continue
+  - assembly: Assembly-CSharp
+    fullTypeName: SkillUIController
+    methodName: MenuButton
   - assembly: Assembly-CSharp
     fullTypeName: ResultNameInput
     methodName: InputName
@@ -877,7 +889,7 @@ ScriptsOnlyBuild:
     className: MissileController
   - hash:
       serializedVersion: 2
-      Hash: ca910f344cf61e78b3f04492ad1faa3e
+      Hash: e68f089586ff3b5d7f92d85756e07721
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SkillUIController
@@ -1371,4 +1383,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/Main menu.unity
   - Assets/Scenes/Game.unity
-  playerPath: D:/GitHub/Unity/halu99/UnityBuild/halu99.exe
+  playerPath: C:/Users/SGA/Desktop/halu99/UnityBuild/halu99.exe

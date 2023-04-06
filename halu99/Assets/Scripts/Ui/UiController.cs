@@ -169,4 +169,13 @@ public class UiController : MonoBehaviour
 
         Application.Quit();
     }
+
+    public void ResetButton()
+    {
+        SoundManager.Instance.soundManager("Click");
+
+        ControllerManager.GetInstance().UpDateRank = true;
+
+        PlayerPrefs.DeleteAll();
+    }
 }
