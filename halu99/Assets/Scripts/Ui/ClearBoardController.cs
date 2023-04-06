@@ -19,7 +19,7 @@ public class ClearBoardController : MonoBehaviour
 
     private Animator Ani;
 
-    private int Time;
+    private int time;
 
 
     private void Awake()
@@ -47,7 +47,11 @@ public class ClearBoardController : MonoBehaviour
 
     void Update()
     {
-        UpRank();
+        if (ControllerManager.GetInstance().UpDateRankBoard)
+        {
+            ControllerManager.GetInstance().UpDateRankBoard = false;
+            UpRank();
+        }
 
         if (ControllerManager.GetInstance().BossDie || ControllerManager.GetInstance().RankButton) 
         {
@@ -66,17 +70,17 @@ public class ClearBoardController : MonoBehaviour
         secondUserName.text = ControllerManager.GetInstance().SecondUserName;
         thirdName.text = ControllerManager.GetInstance().ThirdName;
 
-        Time = ControllerManager.GetInstance().BastClearTime;
-        BastTime.text = (Time / 60).ToString("D2") + ":" + (Time % 60).ToString("D2");
+        time = ControllerManager.GetInstance().BastClearTime;
+        BastTime.text = (time / 60).ToString("D2") + ":" + (time % 60).ToString("D2");
 
-        Time = ControllerManager.GetInstance().SecondClearTime;
-        SecondTime.text = (Time / 60).ToString("D2") + ":" + (Time % 60).ToString("D2");
+        time = ControllerManager.GetInstance().SecondClearTime;
+        SecondTime.text = (time / 60).ToString("D2") + ":" + (time % 60).ToString("D2");
 
-        Time = ControllerManager.GetInstance().ThirdClearTime;
-        ThirdTime.text = (Time / 60).ToString("D2") + ":" + (Time % 60).ToString("D2");
+        time = ControllerManager.GetInstance().ThirdClearTime;
+        ThirdTime.text = (time / 60).ToString("D2") + ":" + (time % 60).ToString("D2");
 
-        Time = ControllerManager.GetInstance().ClearTime;
-        ClearTime.text = (Time / 60).ToString("D2") + ":" + (Time % 60).ToString("D2");
+        time = ControllerManager.GetInstance().ClearTime;
+        ClearTime.text = (time / 60).ToString("D2") + ":" + (time % 60).ToString("D2");
     }
 
     public void OnHomeButton()
@@ -84,6 +88,8 @@ public class ClearBoardController : MonoBehaviour
         ControllerManager.GetInstance().BossDie = false;
 
         SoundManager.Instance.soundManager("Click");
+
+        Time.timeScale = 1;
 
         SceneManager.LoadScene("Main menu");
 

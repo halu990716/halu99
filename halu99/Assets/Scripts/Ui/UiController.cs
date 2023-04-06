@@ -64,7 +64,7 @@ public class UiController : MonoBehaviour
         ControllerManager.GetInstance().MissileCount = 0;
         ControllerManager.GetInstance().EnemyHp = 30;
 
-        ControllerManager.GetInstance().BossHp = 30000;
+        ControllerManager.GetInstance().BossHp = 30;
         ControllerManager.GetInstance().BossDie = false;
 
         //audioSource.PlayOneShot(Click);
@@ -174,8 +174,8 @@ public class UiController : MonoBehaviour
     {
         SoundManager.Instance.soundManager("Click");
 
-        ControllerManager.GetInstance().UpDateRank = true;
-
         PlayerPrefs.DeleteAll();
+
+        ControllerManager.GetInstance().ResetRank = true;
     }
 }

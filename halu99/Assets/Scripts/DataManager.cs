@@ -27,48 +27,14 @@ public class DataManager : MonoBehaviour
 
     private void Start()
     {
-        if (!PlayerPrefs.HasKey("BastUserName"))
-        {
-            PlayerPrefs.SetString("BastUserName", "NULL");
-        }
-
-        if (!PlayerPrefs.HasKey("BastClearTime"))
-        {
-            PlayerPrefs.SetInt("BastClearTime", 9999);
-        }
-
-        if (!PlayerPrefs.HasKey("SecondUserName"))
-        {
-            PlayerPrefs.SetString("SecondUserName", "NULL");
-        }
-
-        if (!PlayerPrefs.HasKey("SecondClearTime"))
-        {
-            PlayerPrefs.SetInt("SecondClearTime", 9999);
-        }
-
-        if (!PlayerPrefs.HasKey("ThirdUserName"))
-        {
-            PlayerPrefs.SetString("ThirdUserName", "NULL");
-        }
-
-        if (!PlayerPrefs.HasKey("ThirdClearTime"))
-        {
-            PlayerPrefs.SetInt("ThirdClearTime", 9999);
-        }
-
-        bastUserName = ControllerManager.GetInstance().BastUserName = PlayerPrefs.GetString("BastUserName");
-        bastClearTime = ControllerManager.GetInstance().BastClearTime = PlayerPrefs.GetInt("BastClearTime");
-
-        secondUserName = ControllerManager.GetInstance().SecondUserName = PlayerPrefs.GetString("SecondUserName");
-        secondClearTime = ControllerManager.GetInstance().SecondClearTime = PlayerPrefs.GetInt("SecondClearTime");
-
-        thirdUserName = ControllerManager.GetInstance().ThirdName = PlayerPrefs.GetString("ThirdUserName");
-        thirdClearTime = ControllerManager.GetInstance().ThirdClearTime = PlayerPrefs.GetInt("ThirdClearTime");
+        ResetRank();
     }
 
     void Update()
     {
+        if (ControllerManager.GetInstance().ResetRank)
+            ResetRank();
+
         if (ControllerManager.GetInstance().UpDateRank)
         {
             ControllerManager.GetInstance().UpDateRank = false;
@@ -118,6 +84,53 @@ public class DataManager : MonoBehaviour
 
             PlayerPrefs.SetString("ThirdUserName", thirdUserName);
             PlayerPrefs.SetInt("ThirdClearTime", thirdClearTime);
+
+            ControllerManager.GetInstance().UpDateRankBoard = true;
         }
+    }
+
+    void ResetRank()
+    {
+        if(!PlayerPrefs.HasKey("BastUserName"))
+        {
+            PlayerPrefs.SetString("BastUserName", "NULL");
+        }
+
+        if (!PlayerPrefs.HasKey("BastClearTime"))
+        {
+            PlayerPrefs.SetInt("BastClearTime", 9999);
+        }
+
+        if (!PlayerPrefs.HasKey("SecondUserName"))
+        {
+            PlayerPrefs.SetString("SecondUserName", "NULL");
+        }
+
+        if (!PlayerPrefs.HasKey("SecondClearTime"))
+        {
+            PlayerPrefs.SetInt("SecondClearTime", 9999);
+        }
+
+        if (!PlayerPrefs.HasKey("ThirdUserName"))
+        {
+            PlayerPrefs.SetString("ThirdUserName", "NULL");
+        }
+
+        if (!PlayerPrefs.HasKey("ThirdClearTime"))
+        {
+            PlayerPrefs.SetInt("ThirdClearTime", 9999);
+        }
+
+        bastUserName = ControllerManager.GetInstance().BastUserName = PlayerPrefs.GetString("BastUserName");
+        bastClearTime = ControllerManager.GetInstance().BastClearTime = PlayerPrefs.GetInt("BastClearTime");
+
+        secondUserName = ControllerManager.GetInstance().SecondUserName = PlayerPrefs.GetString("SecondUserName");
+        secondClearTime = ControllerManager.GetInstance().SecondClearTime = PlayerPrefs.GetInt("SecondClearTime");
+
+        thirdUserName = ControllerManager.GetInstance().ThirdName = PlayerPrefs.GetString("ThirdUserName");
+        thirdClearTime = ControllerManager.GetInstance().ThirdClearTime = PlayerPrefs.GetInt("ThirdClearTime");
+
+        ControllerManager.GetInstance().UpDateRankBoard = true;
+
     }
 }
