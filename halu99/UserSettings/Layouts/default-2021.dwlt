@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1904
     height: 979
   m_ShowMode: 4
-  m_Title: "\uAC8C\uC784"
+  m_Title: "\uD504\uB85C\uC81D\uD2B8"
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 128
+  controlID: 49
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 114
+  controlID: 50
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 115
+  controlID: 102
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -298,8 +298,8 @@ MonoBehaviour:
     y: 0
     width: 418
     height: 929
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
@@ -739,9 +739,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 473.49902, y: 131.24623, z: 194.10489}
+    m_Target: {x: 366.6435, y: 294.071, z: 243.59326}
     speed: 2
-    m_Value: {x: 473.49902, y: 131.24623, z: 194.10489}
+    m_Value: {x: 366.6435, y: 294.071, z: 243.59326}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -792,9 +792,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 569.0052
+    m_Target: 375.6395
     speed: 2
-    m_Value: 569.0052
+    m_Value: 393.33978
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -890,22 +890,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/box
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/box
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\SGA\Desktop\halu99\halu99
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 97}
-    m_SelectedIDs: 2a5c0000
-    m_LastClickedID: 23594
-    m_ExpandedIDs: 00000000a25b0000a45b0000a65b0000a85b0000aa5b0000ac5b0000ae5b0000b05b0000b25b0000b45b00002a5c00004c66000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 79}
+    m_SelectedIDs: a25b0000
+    m_LastClickedID: 23458
+    m_ExpandedIDs: 00000000a25b0000a45b0000a65b0000a85b0000aa5b0000ac5b0000ae5b0000b05b0000b25b0000b45b000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1082,9 +1082,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 665c0000
       m_LastClickedID: 0
-      m_ExpandedIDs: 32fbfffff4ffffff0e590000d8590000
+      m_ExpandedIDs: b2f9ffff02faffff32fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
