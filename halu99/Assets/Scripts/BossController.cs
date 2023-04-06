@@ -317,6 +317,12 @@ public class BossController : MonoBehaviour
 
             SoundManager.Instance.soundManager("Clear");
 
+            // ** 진동효과를 생성할 관리자 생성.
+            GameObject camera = new GameObject("CameraController");
+
+            // ** 진동 효과 컨트롤러 생성.
+            camera.AddComponent<CameraController>();
+
             Destroy(gameObject, 0.016f);
 
         }

@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
     private GameObject Parent;
     // 복사할 미사일 원본
     private GameObject MissilePrefab;
+    private GameObject GuidedMissilePrefab;
 
     private GameObject DieFx;
 
@@ -61,6 +62,8 @@ public class PlayerController : MonoBehaviour
 
         // player 의 spriteRenderer 받아온다.
         playerRenderer = this.GetComponent<SpriteRenderer>();
+
+        GuidedMissilePrefab = Resources.Load("Prefabs/Player/Missile/Missile_Hiden") as GameObject;
 
         switch (Player_List)
         {
@@ -229,22 +232,15 @@ public class PlayerController : MonoBehaviour
 
             SoundManager.Instance.soundManager("PlayerDie");
 
+            // ** 진동효과를 생성할 관리자 생성.
+            GameObject camera = new GameObject("CameraController");
+
+            // ** 진동 효과 컨트롤러 생성.
+            camera.AddComponent<CameraController>();
+
             Destroy(gameObject, 0.016f);
         }
     }
-
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if (collision.transform.tag == "Enemy" && !WaitHit)
-    //    {
-    //        OnHit();
-    //    }
-
-    //    if (collision.transform.tag == "EnemyMissile" && !WaitHit)
-    //    {
-    //        OnHit();
-    //    }
-    //}
 
     IEnumerator WaitHIT()
     {
