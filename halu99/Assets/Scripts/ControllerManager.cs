@@ -22,6 +22,8 @@ public class ControllerManager
 
     public int Player_List = 1;
 
+    public int Coin;
+
     public int Player_MaxHp = 3;
     public int Player_HP = 3;
     public bool Player_Die = false;

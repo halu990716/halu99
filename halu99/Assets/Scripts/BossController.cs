@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using static BossController;
 
 public class BossController : MonoBehaviour
@@ -24,9 +23,10 @@ public class BossController : MonoBehaviour
 
     private List<GameObject> MissiletList = new List<GameObject>();
     private GameObject BossMissile;
-    private GameObject EnemyMissile;
+    private GameObject parent;
     private GameObject EnemyManager;
     private GameObject Timer;
+    private GameObject Coin;
 
     private int HP;
     private int Rand;
@@ -41,8 +41,10 @@ public class BossController : MonoBehaviour
         Target = GameObject.Find("Player");
         EnemyManager = GameObject.Find("EnemyManager");
         Timer = GameObject.Find("Timer");
+        parent = GameObject.Find("EnemyList");
+
         BossMissile = Resources.Load("Prefabs/Enemy/Missile/BossMissile") as GameObject;
-        EnemyMissile = Resources.Load("Prefabs/Enemy/Missile/Missile2") as GameObject;
+        Coin = Resources.Load("Prefabs/UI/Coin") as GameObject;
 
         Ani = GetComponent<Animator>();
 
@@ -248,12 +250,10 @@ public class BossController : MonoBehaviour
                 Mathf.Sin(_angle * 3.141592f / 180),
                 0.0f) * 5;
 
-
             Obj.transform.position = transform.position;
             Obj.transform.parent = EnemyManager.transform;
 
             MissiletList.Add(Obj);
-
         }
     }
 
@@ -323,8 +323,16 @@ public class BossController : MonoBehaviour
             // ** 진동 효과 컨트롤러 생성.
             camera.AddComponent<CameraController>();
 
-            Destroy(gameObject, 0.016f);
+            GameObject CoinObj = Instantiate(Coin);
 
+            CoinObj.transform.position = transform.position;
+            CoinObj.transform.parent = parent.transform;
+            CoinObj.transform.name = "Coin";
+            CoinObj.transform.localScale = new Vector3(2.0f, 2.0f, 0.0f);
+
+            ControllerManager.GetInstance().Coin += 100;
+
+            Destroy(gameObject, 0.016f);
         }
     }
 }

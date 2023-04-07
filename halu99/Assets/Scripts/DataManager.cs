@@ -25,9 +25,13 @@ public class DataManager : MonoBehaviour
     private string thirdUserName;
     private int thirdClearTime;
 
+    private int Coin;
+
     private void Start()
     {
         UpLoadRank();
+
+        ControllerManager.GetInstance().UpLoadRank = true;
     }
 
     void Update()
@@ -89,11 +93,14 @@ public class DataManager : MonoBehaviour
 
             ControllerManager.GetInstance().UpDateRankBoard = true;
         }
+        PlayerPrefs.SetInt("Coin", ControllerManager.GetInstance().Coin);
     }
 
     void UpLoadRank()
     {
-        if(!PlayerPrefs.HasKey("BastUserName"))
+        ControllerManager.GetInstance().UpLoadRank = false;
+
+        if (!PlayerPrefs.HasKey("BastUserName"))
         {
             PlayerPrefs.SetString("BastUserName", "NULL");
         }
@@ -123,6 +130,11 @@ public class DataManager : MonoBehaviour
             PlayerPrefs.SetInt("ThirdClearTime", 9999);
         }
 
+        if (!PlayerPrefs.HasKey("Coin"))
+        {
+            PlayerPrefs.SetInt("Coin", 0);
+        }
+
         bastUserName = ControllerManager.GetInstance().BastUserName = PlayerPrefs.GetString("BastUserName");
         bastClearTime = ControllerManager.GetInstance().BastClearTime = PlayerPrefs.GetInt("BastClearTime");
 
@@ -131,6 +143,8 @@ public class DataManager : MonoBehaviour
 
         thirdUserName = ControllerManager.GetInstance().ThirdName = PlayerPrefs.GetString("ThirdUserName");
         thirdClearTime = ControllerManager.GetInstance().ThirdClearTime = PlayerPrefs.GetInt("ThirdClearTime");
+
+        Coin = ControllerManager.GetInstance().Coin = PlayerPrefs.GetInt("Coin");
 
         ControllerManager.GetInstance().UpDateRankBoard = true;
 

@@ -46,6 +46,10 @@ public class UiController : MonoBehaviour
     {
         TitleSwich();
 
+        ControllerManager.GetInstance().UpDateRank = true;
+
+        ControllerManager.GetInstance().UpDateRank = true;
+
         PlayerList.SetActive(!GameStartActive);
 
         ControllerManager.GetInstance().Player_MaxHp = 3;
@@ -77,6 +81,8 @@ public class UiController : MonoBehaviour
         TitleSwich();
 
         TutorialBoardCheck = !TutorialBoardCheck;
+
+
 
         TutorialBoardAni.SetBool("Move", TutorialBoardCheck);
 

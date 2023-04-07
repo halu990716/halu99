@@ -21,6 +21,7 @@ public class EnemyController : MonoBehaviour
     private GameObject Parent;
     private GameObject Missile;
     private GameObject prefab;
+    private GameObject Coin;
 
     private int rand;
 
@@ -31,6 +32,7 @@ public class EnemyController : MonoBehaviour
     {
         Ani = GetComponent<Animator>();
         Missile = Resources.Load("Prefabs/Enemy/Missile/Missile") as GameObject;
+        Coin = Resources.Load("Prefabs/UI/Coin") as GameObject;
 
         rand = 1;
         HidenB = false;
@@ -146,17 +148,27 @@ public class EnemyController : MonoBehaviour
                     }
                     break;
             }
-        if (rand <= Hiden && !HidenB)
-        {
-            // ** Enemy 원형객체를 복제한다.
-            GameObject Obj = Instantiate(prefab);
+            if (rand <= Hiden && !HidenB)
+            {
+                // ** Enemy 원형객체를 복제한다.
+                GameObject Obj = Instantiate(prefab);
 
-            Obj.transform.position = transform.position;
-            Obj.transform.parent = Parent.transform;
-            Obj.transform.name = "Item";
-        }
-        GetComponent<CapsuleCollider2D>().enabled = false;
-        Destroy(gameObject, 0.016f);
+                Obj.transform.position = transform.position;
+                Obj.transform.parent = Parent.transform;
+                Obj.transform.name = "Item";
+            }
+
+            GameObject CoinObj = Instantiate(Coin);
+
+            CoinObj.transform.position = transform.position;
+            CoinObj.transform.parent = Parent.transform;
+            CoinObj.transform.name = "Coin";
+
+            ControllerManager.GetInstance().Coin += 1;
+
+            GetComponent<CapsuleCollider2D>().enabled = false;
+
+            Destroy(gameObject, 0.016f);
         }
     }
     private void OnEnemyAttack()
