@@ -521,6 +521,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092b00ae677e88b44ae1ded20079c7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EmailInput: {fileID: 1778093915}
+  PasswordInput: {fileID: 1283779029}
 --- !u!1 &660444988
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +693,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 601408596}
         m_TargetAssemblyTypeName: ExampleManager, Assembly-CSharp
-        m_MethodName: NextScene
+        m_MethodName: Register
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

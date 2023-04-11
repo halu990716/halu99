@@ -3,21 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
-
-[System.Serializable]
-public class MemberForm
-{
-    public int Index;
-    public string Email;
-    public string Password;
-
-    public MemberForm(int index, string email, string password)
-    {
-        Index = index;
-        Email = email;
-        Password = password;
-    }
-}
+using UnityEngine.UI;
 // 회원가입
 // 로그인
 
@@ -25,9 +11,11 @@ public class MemberForm
 public class ExampleManager : MonoBehaviour
 {
 
-    string URL = "https://script.google.com/macros/s/AKfycbwfS_RSV5Z2-up0MuMk6BgwfVbJCgqEJsvn6A5z-y4G79W71B1v4DICkXKie-FptlPE/exec";
+    const string URL = "https://script.google.com/macros/s/AKfycbwfS_RSV5Z2-up0MuMk6BgwfVbJCgqEJsvn6A5z-y4G79W71B1v4DICkXKie-FptlPE/exec";
+    public InputField EmailInput, PasswordInput;
+    string email, password;
 
-
+    /*
     IEnumerator Start()
     {
         // ** 요청을 하기위한 작업.
@@ -49,7 +37,7 @@ public class ExampleManager : MonoBehaviour
             print(request.downloadHandler.text);
         }
     }
-
+    */
 
     /*
     IEnumerator Start()
@@ -70,6 +58,44 @@ public class ExampleManager : MonoBehaviour
         }
     }
     */
+
+    bool SetEmailPass()
+    {
+        email = EmailInput.text.Trim();
+        password = PasswordInput.text.Trim();
+
+        if (email == "" || password == "") return false;
+        else return true;
+    }
+
+    public void Register()
+    {
+        if (!SetEmailPass())
+        {
+            print("아이디 또는 비밀번호가 비어있습니다");
+            return;
+        }
+
+        WWWForm form = new WWWForm();
+        form.AddField("order", "register");
+        form.AddField("email", email);
+        form.AddField("password", password);
+
+        StartCoroutine(Post(form));
+    }
+
+    IEnumerator Post(WWWForm form)
+    {
+        using (UnityWebRequest www = UnityWebRequest.Post(URL, form))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.isDone)
+                print(www.downloadHandler.text);
+            else
+                print("웹의 응답이 없습니다.");
+        }
+    }
 
     public void NextScene()
     {
