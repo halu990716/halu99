@@ -18,7 +18,7 @@ public class ExampleManager : MonoBehaviour
 
     const string URL = "https://script.google.com/macros/s/AKfycbwfS_RSV5Z2-up0MuMk6BgwfVbJCgqEJsvn6A5z-y4G79W71B1v4DICkXKie-FptlPE/exec";
     public GoogleData GD;
-    public InputField EmailInput, PasswordInput, ValueInput;
+    public InputField IDInput, PasswordInput, ValueInput;
     string id, password;
 
     bool delaybool = false;
@@ -66,9 +66,9 @@ public class ExampleManager : MonoBehaviour
     }
     */
 
-    bool SetEmailPass()
+    bool SetIDPass()
     {
-        id = EmailInput.text.Trim();
+        id = IDInput.text.Trim();
         password = PasswordInput.text.Trim();
 
         if (id == "" || password == "") return false;
@@ -81,7 +81,7 @@ public class ExampleManager : MonoBehaviour
         {
             delaybool = true;
 
-            if (!SetEmailPass())
+            if (!SetIDPass())
             {
                 print("아이디 또는 비밀번호가 비어있습니다");
                 StartCoroutine(delay());
@@ -104,7 +104,7 @@ public class ExampleManager : MonoBehaviour
         {
             delaybool = true;
 
-            if (!SetEmailPass())
+            if (!SetIDPass())
             {
                 print("아이디 또는 비밀번호가 비어있습니다");
                 StartCoroutine(delay());

@@ -1038,7 +1038,7 @@ MonoBehaviour:
     result: 
     msg: 
     value: 
-  EmailInput: {fileID: 418532742}
+  IDInput: {fileID: 418532742}
   PasswordInput: {fileID: 1323758626}
   ValueInput: {fileID: 76259609}
 --- !u!1 &640350414
