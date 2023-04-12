@@ -4,17 +4,24 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+
+[System.Serializable]
+public class GoogleData
+{
+    public string order, result, msg, value;
+}
 // 회원가입
 // 로그인
-
 
 public class ExampleManager : MonoBehaviour
 {
 
     const string URL = "https://script.google.com/macros/s/AKfycbwfS_RSV5Z2-up0MuMk6BgwfVbJCgqEJsvn6A5z-y4G79W71B1v4DICkXKie-FptlPE/exec";
-    public InputField EmailInput, PasswordInput;
-    string email, password;
+    public GoogleData GD;
+    public InputField EmailInput, PasswordInput, ValueInput;
+    string id, password;
 
+    bool delaybool = false;
     /*
     IEnumerator Start()
     {
@@ -61,25 +68,81 @@ public class ExampleManager : MonoBehaviour
 
     bool SetEmailPass()
     {
-        email = EmailInput.text.Trim();
+        id = EmailInput.text.Trim();
         password = PasswordInput.text.Trim();
 
-        if (email == "" || password == "") return false;
+        if (id == "" || password == "") return false;
         else return true;
     }
 
     public void Register()
     {
-        if (!SetEmailPass())
+        if(!delaybool)
         {
-            print("아이디 또는 비밀번호가 비어있습니다");
-            return;
-        }
+            delaybool = true;
 
+            if (!SetEmailPass())
+            {
+                print("아이디 또는 비밀번호가 비어있습니다");
+                StartCoroutine(delay());
+                return;
+            }
+
+            WWWForm form = new WWWForm();
+            form.AddField("order", "register");
+            form.AddField(nameof(id), id);
+            form.AddField(nameof(password), password);
+
+            StartCoroutine(Post(form));
+            StartCoroutine(delay());
+        }
+    }
+
+    public void Login()
+    {
+        if (!delaybool)
+        {
+            delaybool = true;
+
+            if (!SetEmailPass())
+            {
+                print("아이디 또는 비밀번호가 비어있습니다");
+                StartCoroutine(delay());
+                return;
+            }
+
+            WWWForm form = new WWWForm();
+            form.AddField("order", "login");
+            form.AddField(nameof(id), id);
+            form.AddField(nameof(password), password);
+
+            StartCoroutine(Post(form));
+            StartCoroutine(delay());
+        }
+    }
+
+    public void SetValue()
+    {
         WWWForm form = new WWWForm();
-        form.AddField("order", "register");
-        form.AddField("email", email);
-        form.AddField("password", password);
+        form.AddField("order", "setValue");
+
+        form.AddField("value", ValueInput.text);
+
+        StartCoroutine(Post(form));
+    }
+
+    public void GetValue()
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("order", "getValue");
+
+        StartCoroutine(Post(form));
+    }
+
+    private void OnApplicationQuit()
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("order", "logout");
 
         StartCoroutine(Post(form));
     }
@@ -91,9 +154,30 @@ public class ExampleManager : MonoBehaviour
             yield return www.SendWebRequest();
 
             if (www.isDone)
-                print(www.downloadHandler.text);
+                Response(www.downloadHandler.text);
             else
                 print("웹의 응답이 없습니다.");
+        }
+    }
+
+    void Response(string json)
+    {
+        if (string.IsNullOrEmpty(json)) 
+            return;
+
+        GD = JsonUtility.FromJson<GoogleData>(json);
+
+        if (GD.result == "ERROR")
+        {
+            print(GD.order + "을 실핼할 수 없습니다. 에러 메시지 : " + GD.msg);
+            return;
+        }
+
+        print(GD.order + "을 실행했습니다. 메시지 : " + GD.msg);
+
+        if (GD.order == "getValue")
+        {
+            ValueInput.text = GD.value;
         }
     }
 
@@ -102,5 +186,11 @@ public class ExampleManager : MonoBehaviour
         SceneManager.LoadScene("progressScenes");
     }
 
+    IEnumerator delay()
+    {
+        yield return new WaitForSeconds(0.7f);
+
+        delaybool = false;
+    }
 }
 
