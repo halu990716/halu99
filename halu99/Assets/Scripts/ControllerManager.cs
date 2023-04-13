@@ -14,7 +14,7 @@ public class ControllerManager
         return Instance;
     }
     public string Login;
-    public string ID;
+    public int Index;
 
     public bool RankButton = false;
     public bool UpLoadRank = false;

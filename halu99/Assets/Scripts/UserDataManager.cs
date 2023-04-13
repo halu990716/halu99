@@ -49,8 +49,7 @@ public class UserDataManager : MonoBehaviour
     {
         WWWForm form = new WWWForm();
         form.AddField("order", "getData");
-        form.AddField("id", ControllerManager.GetInstance().ID);
-
+        form.AddField("index", ControllerManager.GetInstance().Index);
 
         StartCoroutine(Post(form));
     }

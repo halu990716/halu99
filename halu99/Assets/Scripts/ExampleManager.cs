@@ -4,11 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using System;
+using System.Reflection;
 
 [System.Serializable]
 public class GoogleData
 {
-    public string order, result, msg, login, check;
+    public string order, result, msg, login;
+    public int index;
 }
 // 회원가입
 // 로그인
@@ -25,7 +28,8 @@ public class ExampleManager : MonoBehaviour
 
     public InputField IDInput, PasswordInput;
 
-    string id, password;
+    string id;
+    string password;
 
     bool delaybool = false;
     /*
@@ -197,7 +201,8 @@ public class ExampleManager : MonoBehaviour
 
         if(GD.login == "true")
         {
-            ControllerManager.GetInstance().ID = id;
+
+            ControllerManager.GetInstance().Index = GD.index;
 
             GetComponent<UserDataManager>().IDData();
 
