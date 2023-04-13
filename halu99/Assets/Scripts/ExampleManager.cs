@@ -8,7 +8,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class GoogleData
 {
-    public string order, result, msg, value;
+    public string order, result, msg, login, check;
 }
 // 회원가입
 // 로그인
@@ -18,7 +18,13 @@ public class ExampleManager : MonoBehaviour
 
     const string URL = "https://script.google.com/macros/s/AKfycbwfS_RSV5Z2-up0MuMk6BgwfVbJCgqEJsvn6A5z-y4G79W71B1v4DICkXKie-FptlPE/exec";
     public GoogleData GD;
-    public InputField IDInput, PasswordInput, ValueInput;
+
+    public GameObject Check;
+
+    public Text checkText;
+
+    public InputField IDInput, PasswordInput;
+
     string id, password;
 
     bool delaybool = false;
@@ -85,6 +91,10 @@ public class ExampleManager : MonoBehaviour
             {
                 print("아이디 또는 비밀번호가 비어있습니다");
                 StartCoroutine(delay());
+
+                checkText.text = "아이디 또는 비밀번호가 비어있습니다";
+
+                Check.SetActive(true);
                 return;
             }
 
@@ -108,6 +118,10 @@ public class ExampleManager : MonoBehaviour
             {
                 print("아이디 또는 비밀번호가 비어있습니다");
                 StartCoroutine(delay());
+
+                checkText.text = "아이디 또는 비밀번호가 비어있습니다";
+
+                Check.SetActive(true);
                 return;
             }
 
@@ -119,24 +133,6 @@ public class ExampleManager : MonoBehaviour
             StartCoroutine(Post(form));
             StartCoroutine(delay());
         }
-    }
-
-    public void SetValue()
-    {
-        WWWForm form = new WWWForm();
-        form.AddField("order", "setValue");
-
-        form.AddField("value", ValueInput.text);
-
-        StartCoroutine(Post(form));
-    }
-
-    public void GetValue()
-    {
-        WWWForm form = new WWWForm();
-        form.AddField("order", "getValue");
-
-        StartCoroutine(Post(form));
     }
 
     private void OnApplicationQuit()
@@ -169,21 +165,23 @@ public class ExampleManager : MonoBehaviour
 
         if (GD.result == "ERROR")
         {
-            print(GD.order + "을 실핼할 수 없습니다. 에러 메시지 : " + GD.msg);
+            print(GD.order + "을 실행할 수 없습니다. 에러 메시지 : " + GD.msg);
+
+            checkText.text = GD.msg;
+
+            Check.SetActive(true);
+
             return;
         }
 
         print(GD.order + "을 실행했습니다. 메시지 : " + GD.msg);
 
-        if (GD.order == "getValue")
-        {
-            ValueInput.text = GD.value;
-        }
-    }
+        ControllerManager.GetInstance().Login = GD.login;
 
-    public void NextScene()
-    {
-        SceneManager.LoadScene("progressScenes");
+        checkText.text = GD.msg;
+
+        Check.SetActive(true);
+
     }
 
     IEnumerator delay()
@@ -191,6 +189,20 @@ public class ExampleManager : MonoBehaviour
         yield return new WaitForSeconds(0.7f);
 
         delaybool = false;
+    }
+
+    public void checkButton()
+    {
+        Check.SetActive(false);
+
+        if(GD.login == "true")
+        {
+            ControllerManager.GetInstance().ID = id;
+
+            GetComponent<UserDataManager>().IDData();
+
+            SceneManager.LoadScene("progressScenes");
+        }
     }
 }
 

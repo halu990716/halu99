@@ -13,6 +13,9 @@ public class ControllerManager
             Instance = new ControllerManager();
         return Instance;
     }
+    public string Login;
+    public string ID;
+
     public bool RankButton = false;
     public bool UpLoadRank = false;
     public bool UpDateRank = true;
