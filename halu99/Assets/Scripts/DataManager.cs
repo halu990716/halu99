@@ -29,8 +29,6 @@ public class DataManager : MonoBehaviour
 
     private void Start()
     {
-        UpLoadRank();
-
         ControllerManager.GetInstance().UpLoadRank = true;
     }
 
@@ -45,7 +43,10 @@ public class DataManager : MonoBehaviour
         {
             ControllerManager.GetInstance().UpDateRank = false;
 
-            if (bastClearTime > ControllerManager.GetInstance().ClearTime)
+            if (bastClearTime > ControllerManager.GetInstance().ClearTime&&
+                ControllerManager.GetInstance().UserName != bastUserName&&
+                ControllerManager.GetInstance().UserName != secondUserName &&
+                ControllerManager.GetInstance().UserName != thirdUserName)
             {
                 thirdUserName = secondUserName;
                 thirdClearTime = secondClearTime;
@@ -57,7 +58,9 @@ public class DataManager : MonoBehaviour
                 bastClearTime = ControllerManager.GetInstance().ClearTime;
             }
 
-            else if (secondClearTime > ControllerManager.GetInstance().ClearTime)
+            else if (secondClearTime > ControllerManager.GetInstance().ClearTime&&
+                ControllerManager.GetInstance().UserName != secondUserName&&
+                ControllerManager.GetInstance().UserName != thirdUserName)
             {
                 thirdUserName = secondUserName;
                 thirdClearTime = secondClearTime;
@@ -67,7 +70,8 @@ public class DataManager : MonoBehaviour
 
             }
 
-            else if (thirdClearTime > ControllerManager.GetInstance().ClearTime)
+            else if (thirdClearTime > ControllerManager.GetInstance().ClearTime&&
+                ControllerManager.GetInstance().UserName != thirdUserName)
             {
                 thirdUserName = ControllerManager.GetInstance().UserName;
                 thirdClearTime = ControllerManager.GetInstance().ClearTime;

@@ -144,6 +144,8 @@ public class ExampleManager : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("order", "logout");
 
+        GetComponent<UserDataManager>().upData();
+
         StartCoroutine(Post(form));
     }
 
@@ -165,6 +167,7 @@ public class ExampleManager : MonoBehaviour
         if (string.IsNullOrEmpty(json)) 
             return;
 
+        
         GD = JsonUtility.FromJson<GoogleData>(json);
 
         if (GD.result == "ERROR")
@@ -203,8 +206,10 @@ public class ExampleManager : MonoBehaviour
         {
 
             ControllerManager.GetInstance().Index = GD.index;
+            ControllerManager.GetInstance().UserName = id;
 
             GetComponent<UserDataManager>().IDData();
+            GetComponent<UserDataManager>().upData();
 
             SceneManager.LoadScene("progressScenes");
         }

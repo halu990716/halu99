@@ -312,6 +312,7 @@ public class BossController : MonoBehaviour
             TimerController sTimer = Timer.GetComponent<TimerController>();
 
             ControllerManager.GetInstance().BossDie = true;
+            ControllerManager.GetInstance().UpDateRank = true;
 
             ControllerManager.GetInstance().ClearTime = sTimer.timer;
 
