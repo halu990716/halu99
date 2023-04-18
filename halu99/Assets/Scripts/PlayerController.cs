@@ -69,27 +69,27 @@ public class PlayerController : MonoBehaviour
         {
             case Ship_1_A:
                 MissilePrefab = Resources.Load("Prefabs/Player/Missile/Missile_A") as GameObject;
-                ControllerManager.GetInstance().Player_HP += 2;
-
+                ControllerManager.GetInstance().Player_HP += ControllerManager.GetInstance().player1;
+                print(ControllerManager.GetInstance().player1);
                 break;
 
             case Ship_1_B:
                 MissilePrefab = Resources.Load("Prefabs/Player/Missile/Missile_B") as GameObject;
-                ControllerManager.GetInstance().SkillCool = 0.2f;
+                ControllerManager.GetInstance().SkillCool = 0.1f + (ControllerManager.GetInstance().player2 * 0.2f);
 
                 break;
 
             case Ship_1_C:
                 MissilePrefab = Resources.Load("Prefabs/Player/Missile/Missile_C") as GameObject;
-                ControllerManager.GetInstance().MaxMissileDamage *= 2;
-                ControllerManager.GetInstance().MissileDamage += 10;
+                ControllerManager.GetInstance().MaxMissileDamage *= 1 + (ControllerManager.GetInstance().player3 * 0.2f);
+                ControllerManager.GetInstance().MissileDamage += ControllerManager.GetInstance().player3 * 2;
                 ControllerManager.GetInstance().Ship_C = true;
 
                 break;
 
             case Ship_1_D:
                 MissilePrefab = Resources.Load("Prefabs/Player/Missile/Missile_D") as GameObject;
-                ControllerManager.GetInstance().AttackSpeed -= 0.5f;
+                ControllerManager.GetInstance().AttackSpeed -= 0.0f + (ControllerManager.GetInstance().player4 * 0.1f);
 
                 break;
         }

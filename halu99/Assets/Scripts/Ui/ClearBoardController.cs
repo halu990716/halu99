@@ -47,10 +47,8 @@ public class ClearBoardController : MonoBehaviour
 
     void Update()
     {
-        if (ControllerManager.GetInstance().UpDateRankBoard)
-        {
-            UpRank();
-        }
+
+        UpRank();
 
         if (ControllerManager.GetInstance().BossDie || ControllerManager.GetInstance().RankButton) 
         {

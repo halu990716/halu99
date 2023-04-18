@@ -67,7 +67,7 @@ public class ItemController : MonoBehaviour
                             ControllerManager.GetInstance().MissileDamage += 10;
                         }
                         else
-                            ControllerManager.GetInstance().MissileDamage += 20;
+                            ControllerManager.GetInstance().MissileDamage += 10 + (ControllerManager.GetInstance().player3 * 2);
                     }
                     break;
 

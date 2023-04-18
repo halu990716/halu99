@@ -26,7 +26,7 @@ public class TwistMissileController : MonoBehaviour
 
     private void Update()
     {
-        Angle += 3.0f;
+        Angle += 230.0f * Time.deltaTime;
 
         if (Twist)
         {

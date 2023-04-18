@@ -34,6 +34,7 @@ public class DataManager : MonoBehaviour
 
     void Update()
     {
+        /*
         if (ControllerManager.GetInstance().UpLoadRank)
         {
             UpLoadRank();
@@ -151,6 +152,7 @@ public class DataManager : MonoBehaviour
         Coin = ControllerManager.GetInstance().Coin = PlayerPrefs.GetInt("Coin");
 
         ControllerManager.GetInstance().UpDateRankBoard = true;
-
+        */
     }
+
 }

@@ -68,7 +68,7 @@ public class UiController : MonoBehaviour
         ControllerManager.GetInstance().MissileCount = 0;
         ControllerManager.GetInstance().EnemyHp = 30;
 
-        ControllerManager.GetInstance().BossHp = 30;
+        ControllerManager.GetInstance().BossHp = 30000;
         ControllerManager.GetInstance().BossDie = false;
 
         //audioSource.PlayOneShot(Click);

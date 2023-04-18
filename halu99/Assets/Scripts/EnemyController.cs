@@ -26,6 +26,7 @@ public class EnemyController : MonoBehaviour
     private int rand;
 
     private bool Run;
+    private bool Attack;
     private bool HidenB;
 
     private void Awake()
@@ -35,6 +36,7 @@ public class EnemyController : MonoBehaviour
         Coin = Resources.Load("Prefabs/UI/Coin") as GameObject;
 
         rand = 1;
+        Attack = false;
         HidenB = false;
 
         Parent = GameObject.Find("EnemyList");
@@ -42,14 +44,13 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
-        Speed = 3.0f;
+        Speed = 17.0f;
         Movement = new Vector3(0.0f, Speed, 0.0f);
         HP = ControllerManager.GetInstance().EnemyHp;
 
         Run = true;
 
-        StartCoroutine(EnemyAttack());
-
+        StartCoroutine(runstop());
     }
 
     private void Update()
@@ -58,6 +59,17 @@ public class EnemyController : MonoBehaviour
         {
             transform.position -= Movement * Time.deltaTime;
         }
+
+        else
+        {
+            if (!Attack)
+            {
+                Attack = true;
+                StartCoroutine(EnemyAttack());
+            }
+        }
+
+        Die();
 
         if (ControllerManager.GetInstance().Player_Die || ControllerManager.GetInstance().BossDie)
             Destroy(gameObject, 0.016f);
@@ -74,9 +86,6 @@ public class EnemyController : MonoBehaviour
 
         if (collision.tag == "Wall")
             Destroy(gameObject, 0.016f);
-
-        Die();
-        
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -87,20 +96,33 @@ public class EnemyController : MonoBehaviour
 
             Ani.SetTrigger("HIT");
         }
-
-        Die();
-
     }
 
     IEnumerator EnemyAttack()
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(2.0f, 5.0f));
-
             OnEnemyAttack();
 
+            yield return new WaitForSeconds(Random.Range(1.0f, 1.7f));
+
+            rand = Random.Range(0, 2);
+
+            if (rand == 1)
+                Movement = new Vector3(Speed, 0.0f, 0.0f);
+
+            else
+                Movement = new Vector3(-Speed, 0.0f, 0.0f);
+
+            Run = true;
         }
+    }
+
+    IEnumerator runstop()
+    {
+        yield return new WaitForSeconds(Random.Range(0.7f, 1.0f));
+
+        Run = false;
     }
 
     private void Die()
@@ -168,7 +190,7 @@ public class EnemyController : MonoBehaviour
 
             GetComponent<CapsuleCollider2D>().enabled = false;
 
-            Destroy(gameObject, 0.016f);
+            Destroy(gameObject);
         }
     }
     private void OnEnemyAttack()

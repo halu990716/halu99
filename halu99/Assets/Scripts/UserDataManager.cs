@@ -10,6 +10,9 @@ using UnityEngine.UI;
 public  class UserData
 {
     public int index, coin, time;
+    public int player1, player2, player3, player4;
+    public int bastTime, secondTime, thirdTime;
+    public string bastName, secondName, thirdName;
 }
 
 public class UserDataManager : MonoBehaviour
@@ -43,15 +46,30 @@ public class UserDataManager : MonoBehaviour
         if (string.IsNullOrEmpty(json))
             return;
 
-        if(getData)
+        UD = JsonUtility.FromJson<UserData>(json);
+
+        if (getData)
         {
             getData = false;
-            UD = JsonUtility.FromJson<UserData>(json);
 
             ControllerManager.GetInstance().Coin = UD.coin;
 
             ControllerManager.GetInstance().ClearTime = UD.time;
+
+            ControllerManager.GetInstance().player1 = UD.player1; 
+            ControllerManager.GetInstance().player2 = UD.player2;
+            ControllerManager.GetInstance().player3 = UD.player3;
+            ControllerManager.GetInstance().player4 = UD.player4;
         }
+
+        ControllerManager.GetInstance().BastUserName = UD.bastName;
+        ControllerManager.GetInstance().BastClearTime = UD.bastTime;
+
+        ControllerManager.GetInstance().SecondUserName = UD.secondName;
+        ControllerManager.GetInstance().SecondClearTime = UD.secondTime;
+
+        ControllerManager.GetInstance().ThirdName = UD.thirdName;
+        ControllerManager.GetInstance().ThirdClearTime = UD.thirdTime;
     }
     
     public void IDData()
@@ -62,11 +80,26 @@ public class UserDataManager : MonoBehaviour
 
         getData = true;
         StartCoroutine(Post(form));
+        StartCoroutine(updateData());
     }
 
     public void upData()
     {
-        StartCoroutine(updateData());
+        WWWForm form = new WWWForm();
+        form.AddField("order", "setData");
+        form.AddField("coin", ControllerManager.GetInstance().Coin);
+        form.AddField("time", ControllerManager.GetInstance().ClearTime);
+        form.AddField("name", ControllerManager.GetInstance().UserName);
+
+        UD.coin = ControllerManager.GetInstance().Coin;
+        UD.time = ControllerManager.GetInstance().ClearTime;
+
+        UD.player1 = ControllerManager.GetInstance().player1;
+        UD.player2 = ControllerManager.GetInstance().player2;
+        UD.player3 = ControllerManager.GetInstance().player3;
+        UD.player4 = ControllerManager.GetInstance().player4;
+
+        StartCoroutine(Post(form));
     }
 
     public IEnumerator updateData()
@@ -79,9 +112,15 @@ public class UserDataManager : MonoBehaviour
             form.AddField("order", "setData");
             form.AddField("coin", ControllerManager.GetInstance().Coin);
             form.AddField("time", ControllerManager.GetInstance().ClearTime);
+            form.AddField("name", ControllerManager.GetInstance().UserName);
 
             UD.coin = ControllerManager.GetInstance().Coin;
             UD.time = ControllerManager.GetInstance().ClearTime;
+
+            UD.player1 = ControllerManager.GetInstance().player1;
+            UD.player2 = ControllerManager.GetInstance().player2;
+            UD.player3 = ControllerManager.GetInstance().player3;
+            UD.player4 = ControllerManager.GetInstance().player4;
 
             StartCoroutine(Post(form));
         }

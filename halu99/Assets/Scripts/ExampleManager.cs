@@ -209,7 +209,6 @@ public class ExampleManager : MonoBehaviour
             ControllerManager.GetInstance().UserName = id;
 
             GetComponent<UserDataManager>().IDData();
-            GetComponent<UserDataManager>().upData();
 
             SceneManager.LoadScene("progressScenes");
         }

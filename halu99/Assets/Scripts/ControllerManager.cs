@@ -16,6 +16,8 @@ public class ControllerManager
     public string Login;
     public int Index;
 
+    public int player1, player2, player3, player4;
+
     public bool RankButton = false;
     public bool UpLoadRank = false;
     public bool UpDateRank = true;
@@ -35,7 +37,7 @@ public class ControllerManager
 
     public bool Ship_C = false;
     public int MissileDamage = 10;
-    public int MaxMissileDamage = 50;
+    public float MaxMissileDamage = 50;
 
     public int MissileHp = 1;
     public float AttackSpeed = 1;

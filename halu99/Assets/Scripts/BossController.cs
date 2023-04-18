@@ -69,6 +69,7 @@ public class BossController : MonoBehaviour
     private void Update()
     {
         Move();
+        Die();
     }
 
     private void Move() 
@@ -286,9 +287,6 @@ public class BossController : MonoBehaviour
             HP = HP - ControllerManager.GetInstance().MissileDamage;
             ControllerManager.GetInstance().BossHp = HP;
         }
-
-        Die();
-
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -299,9 +297,6 @@ public class BossController : MonoBehaviour
 
             Ani.SetTrigger("Hit");
         }
-
-        Die();
-
     }
     
     private void Die()
@@ -333,7 +328,7 @@ public class BossController : MonoBehaviour
 
             ControllerManager.GetInstance().Coin += 100;
 
-            Destroy(gameObject, 0.016f);
+            Destroy(gameObject);
         }
     }
 }
