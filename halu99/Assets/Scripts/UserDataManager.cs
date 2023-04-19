@@ -91,6 +91,11 @@ public class UserDataManager : MonoBehaviour
         form.AddField("time", ControllerManager.GetInstance().ClearTime);
         form.AddField("name", ControllerManager.GetInstance().UserName);
 
+        form.AddField("player1", ControllerManager.GetInstance().player1);
+        form.AddField("player2", ControllerManager.GetInstance().player2);
+        form.AddField("player3", ControllerManager.GetInstance().player3);
+        form.AddField("player4", ControllerManager.GetInstance().player4);
+
         UD.coin = ControllerManager.GetInstance().Coin;
         UD.time = ControllerManager.GetInstance().ClearTime;
 
@@ -113,6 +118,11 @@ public class UserDataManager : MonoBehaviour
             form.AddField("coin", ControllerManager.GetInstance().Coin);
             form.AddField("time", ControllerManager.GetInstance().ClearTime);
             form.AddField("name", ControllerManager.GetInstance().UserName);
+
+            form.AddField("player1", ControllerManager.GetInstance().player1);
+            form.AddField("player2", ControllerManager.GetInstance().player2);
+            form.AddField("player3", ControllerManager.GetInstance().player3);
+            form.AddField("player4", ControllerManager.GetInstance().player4);
 
             UD.coin = ControllerManager.GetInstance().Coin;
             UD.time = ControllerManager.GetInstance().ClearTime;
