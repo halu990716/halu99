@@ -53,6 +53,49 @@ public class ClearBoardController : MonoBehaviour
         if (ControllerManager.GetInstance().BossDie || ControllerManager.GetInstance().RankButton) 
         {
             Ani.SetBool("Move", true);
+
+            if(ControllerManager.GetInstance().BastUserName != ControllerManager.GetInstance().UserName &&
+                ControllerManager.GetInstance().BastClearTime > ControllerManager.GetInstance().ClearTime)
+            {
+                ControllerManager.GetInstance().ThirdClearTime = ControllerManager.GetInstance().SecondClearTime;
+                ControllerManager.GetInstance().ThirdName = ControllerManager.GetInstance().SecondUserName;
+
+                ControllerManager.GetInstance().SecondClearTime = ControllerManager.GetInstance().BastClearTime;
+                ControllerManager.GetInstance().SecondUserName = ControllerManager.GetInstance().BastUserName;
+
+                ControllerManager.GetInstance().BastClearTime = ControllerManager.GetInstance().ClearTime;
+                ControllerManager.GetInstance().BastUserName = ControllerManager.GetInstance().UserName;
+            }
+
+            else if(ControllerManager.GetInstance().ClearTime < ControllerManager.GetInstance().BastClearTime)
+            {
+                ControllerManager.GetInstance().BastClearTime = ControllerManager.GetInstance().ClearTime;
+            }
+
+            else if(ControllerManager.GetInstance().ClearTime < ControllerManager.GetInstance().SecondClearTime &&
+                ControllerManager.GetInstance().UserName != ControllerManager.GetInstance().BastUserName &&
+                ControllerManager.GetInstance().UserName != ControllerManager.GetInstance().SecondUserName)
+            {
+                ControllerManager.GetInstance().ThirdClearTime = ControllerManager.GetInstance().SecondClearTime;
+                ControllerManager.GetInstance().SecondClearTime = ControllerManager.GetInstance().ClearTime;
+
+                ControllerManager.GetInstance().ThirdName = ControllerManager.GetInstance().SecondUserName;
+                ControllerManager.GetInstance().SecondUserName = ControllerManager.GetInstance().UserName;
+            }
+
+            else if(ControllerManager.GetInstance().ClearTime < ControllerManager.GetInstance().SecondClearTime &&
+                ControllerManager.GetInstance().UserName != ControllerManager.GetInstance().BastUserName)
+            {
+                ControllerManager.GetInstance().SecondClearTime = ControllerManager.GetInstance().ClearTime;
+            }
+
+            else if(ControllerManager.GetInstance().ClearTime < ControllerManager.GetInstance().ThirdClearTime &&
+                ControllerManager.GetInstance().UserName != ControllerManager.GetInstance().BastUserName &&
+                ControllerManager.GetInstance().UserName != ControllerManager.GetInstance().SecondUserName)
+            {
+                ControllerManager.GetInstance().ThirdClearTime = ControllerManager.GetInstance().ClearTime;
+                ControllerManager.GetInstance().ThirdName = ControllerManager.GetInstance().UserName;
+            }
         }
         
         if (!ControllerManager.GetInstance().RankButton && !ControllerManager.GetInstance().BossDie)
