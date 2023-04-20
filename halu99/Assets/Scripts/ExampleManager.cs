@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using UnityEngine.UI;
-using System;
-using System.Reflection;
+using System.Text;
+using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 [System.Serializable]
 public class GoogleData
@@ -28,53 +29,17 @@ public class ExampleManager : MonoBehaviour
 
     public InputField IDInput, PasswordInput;
 
+    private string emailPattern = @"^[\w-.]+@([\w-]+.)+[\w-]{2,4}$";
+
     string id;
     string password;
 
     bool delaybool = false;
-    /*
-    IEnumerator Start()
+
+    private void Start()
     {
-        // ** 요청을 하기위한 작업.
-
-        MemberForm member = new MemberForm(1,"","");
-
-        WWWForm form = new WWWForm();
-
-        form.AddField("Index", member.Index);
-        form.AddField("Email", member.Email);
-        form.AddField("Password", member.Password);
-
-        using (UnityWebRequest request = UnityWebRequest.Post(URL, form))
-        {
-            yield return request.SendWebRequest();
-
-            // ** 응답에 대한 작업.
-
-            print(request.downloadHandler.text);
-        }
+        checkText.text = "";
     }
-    */
-
-    /*
-    IEnumerator Start()
-    {
-        WWWForm form = new WWWForm();
-
-        using (UnityWebRequest request = UnityWebRequest.Get(URL))
-        {
-            yield return request.SendWebRequest();
-
-            MemberForm json = JsonUtility.FromJson<MemberForm>(request.downloadHandler.text);
-
-            // ** 응답에 대한 작업.
-
-            print(json.Index);
-            print(json.Email);
-            print(json.Password);
-        }
-    }
-    */
 
     bool SetIDPass()
     {
@@ -83,6 +48,32 @@ public class ExampleManager : MonoBehaviour
 
         if (id == "" || password == "") return false;
         else return true;
+    }
+
+    string Security(string password)
+    {
+        if (string.IsNullOrEmpty(password))
+        {
+            // ** true
+            checkText.text = "password는 필수 입력 값 입니다.";
+            Check.SetActive(true);
+            return "null";
+        }
+        else
+        {
+            // ** 암호화 & 복호화
+            // ** false
+            SHA256 sha = new SHA256Managed();
+            byte[] hash = sha.ComputeHash(Encoding.ASCII.GetBytes(password));
+            StringBuilder stringBuilder = new StringBuilder();
+
+            foreach (byte b in hash)
+            {
+                stringBuilder.AppendFormat("{0:x2}", b);
+            }
+
+            return stringBuilder.ToString();
+        }
     }
 
     public void Register()
@@ -102,6 +93,19 @@ public class ExampleManager : MonoBehaviour
                 return;
             }
 
+            if (!Regex.IsMatch(id, emailPattern))
+            {
+                StartCoroutine(delay());
+
+                checkText.text = "email 형식을 다시 확인하세요!";
+                Check.SetActive(true);
+                return;
+            }
+
+            password = Security(PasswordInput.text);
+
+            // ** login
+            // ** 쓰레드 방법 존재
             WWWForm form = new WWWForm();
             form.AddField("order", "register");
             form.AddField(nameof(id), id);
@@ -128,6 +132,17 @@ public class ExampleManager : MonoBehaviour
                 Check.SetActive(true);
                 return;
             }
+
+            if (!Regex.IsMatch(id, emailPattern))
+            {
+                StartCoroutine(delay());
+
+                checkText.text = "email 형식을 다시 확인하세요!";
+                Check.SetActive(true);
+                return;
+            }
+
+            password = Security(PasswordInput.text);
 
             WWWForm form = new WWWForm();
             form.AddField("order", "login");

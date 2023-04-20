@@ -367,6 +367,7 @@
 "Assets/FX/Scripts/CFXR_Effect.cs"
 "Assets/FX/Scripts/CFX_AutoDestructShuriken.cs"
 "Assets/FX/Scripts/CFX_LightIntensityFade.cs"
+"Assets/LoginController.cs"
 "Assets/Scripts/BackGroundController.cs"
 "Assets/Scripts/BossController.cs"
 "Assets/Scripts/BossMissileController.cs"
