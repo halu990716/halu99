@@ -1,0 +1,16 @@
+public int damage;
+public int defense;
+
+private float dmg;
+
+
+
+private void Awake()
+{
+    damage = 100;
+    defense = 10000;
+
+    dmg = damage * (1 - (defense / (100.0f + defense)));
+
+    print(dmg);
+}

@@ -1,0 +1,109 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CharacterAi : MonoBehaviour
+{
+    public List<GameObject> FoundObjects;
+    public GameObject Target;
+    public float shortDis;
+
+    // 캐릭터의 이동속도
+    public float Speed;
+
+    // 캐릭터의 사거리
+    public float Distance;
+
+    // 캐릭터의 딜레이
+    private float del;
+
+    private string Unit;
+
+    Vector3 dir;
+
+    private void Awake()
+    {
+        Unit = name;
+
+        StartCoroutine(TargetSearch());
+    }
+
+    void Start()
+    {
+        
+    }
+
+    void Update()
+    {
+        Ai();
+    }
+
+    IEnumerator TargetSearch()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(0.016f);
+
+            FoundObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+            shortDis = Vector3.Distance(gameObject.transform.position, FoundObjects[0].transform.position); // 첫번째를 기준으로 잡아주기 
+
+            Target = FoundObjects[0]; // 첫번째를 먼저 
+
+            foreach (GameObject found in FoundObjects)
+            {
+                float Distance = Vector3.Distance(gameObject.transform.position, found.transform.position);
+
+                if (Distance < shortDis) // 위에서 잡은 기준으로 거리 재기
+                {
+                    Target = found;
+                    shortDis = Distance;
+                }
+            }
+            //Debug.Log(Target.name);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, shortDis);
+    }
+
+    private void Ai()
+    {
+        del -= Time.deltaTime;
+
+        if (Target != null &&
+            del <= 0.0f)
+        {
+            dir = (transform.position - Target.transform.position).normalized;
+            float fDist = (transform.position - Target.transform.position).magnitude;
+            if (fDist > (Speed * Time.deltaTime) + Distance)
+            {
+                transform.position -= dir * Speed * Time.deltaTime;
+            }
+            else
+            {
+                switch(Unit)
+                {
+                    case "Slime":
+                        Slime();
+                        break;
+                }
+
+            }
+        }
+    }
+
+    private void Slime()
+    {
+        if (del <= 0.0f)
+        {
+            del = 1.0f;
+
+            Target.GetComponent<MyGizmo>().HP--;
+
+            print("slime");
+        }
+    }
+}

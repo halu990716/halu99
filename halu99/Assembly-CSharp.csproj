@@ -101,9 +101,9 @@
     <Compile Include="Assets\box\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_New.cs" />
     <Compile Include="Assets\box\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightFlicker.cs" />
     <Compile Include="Assets\Scripts\Ui\PlayerHPvar.cs" />
+    <Compile Include="Assets\LoginController.cs" />
     <Compile Include="Assets\FX\Scripts\CFXR_Effect.CameraShake.cs" />
     <Compile Include="Assets\Scripts\Ui\ResultNameInput.cs" />
-    <Compile Include="Assets\LoginController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\box\JMO Assets\Cartoon FX (legacy)\Shaders\CFX3 Multiply Color.shader" />
