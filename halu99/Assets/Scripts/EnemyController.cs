@@ -32,8 +32,8 @@ public class EnemyController : MonoBehaviour
     private void Awake()
     {
         Ani = GetComponent<Animator>();
-        Missile = Resources.Load("Prefabs/Enemy/Missile/Missile") as GameObject;
-        Coin = Resources.Load("Prefabs/UI/Coin") as GameObject;
+        Missile = PrefabManager.instans.getprefabByName("Missile");
+        Coin = PrefabManager.instans.getprefabByName("Coin");
 
         rand = 1;
         Attack = false;

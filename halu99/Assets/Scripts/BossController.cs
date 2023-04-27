@@ -43,8 +43,8 @@ public class BossController : MonoBehaviour
         Timer = GameObject.Find("Timer");
         parent = GameObject.Find("EnemyList");
 
-        BossMissile = Resources.Load("Prefabs/Enemy/Missile/BossMissile") as GameObject;
-        Coin = Resources.Load("Prefabs/UI/Coin") as GameObject;
+        BossMissile = PrefabManager.instans.getprefabByName("BossMissile");
+        Coin = PrefabManager.instans.getprefabByName("Coin");
 
         Ani = GetComponent<Animator>();
 
