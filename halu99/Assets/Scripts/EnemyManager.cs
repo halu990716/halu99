@@ -71,8 +71,7 @@ public class EnemyManager : MonoBehaviour
                 {
                     Boss = true;
 
-                    prefab = Resources.Load("Prefabs/Enemy/Enemy_2_A") as GameObject;
-
+                    prefab = PrefabManager.instans.getprefabByName("Enemy_2_A");
                     GameObject Obj = Instantiate(prefab);
 
                     Obj.transform.position = new Vector3(
@@ -95,25 +94,25 @@ public class EnemyManager : MonoBehaviour
                         case Enemy_1_A:
 
                             // ** Enemy로 사용할 원형 객체
-                            prefab = Resources.Load("Prefabs/Enemy/Enemy_1_A") as GameObject;
+                            prefab = PrefabManager.instans.getprefabByName("Enemy_1_A");
 
                             break;
 
                         case Enemy_1_B:
 
-                            prefab = Resources.Load("Prefabs/Enemy/Enemy_1_B") as GameObject;
+                            prefab = PrefabManager.instans.getprefabByName("Enemy_1_B");
 
                             break;
 
                         case Enemy_1_C:
 
-                            prefab = Resources.Load("Prefabs/Enemy/Enemy_1_C") as GameObject;
+                            prefab = PrefabManager.instans.getprefabByName("Enemy_1_C");
 
                             break;
 
                         case Enemy_1_D:
 
-                            prefab = Resources.Load("Prefabs/Enemy/Enemy_1_D") as GameObject;
+                            prefab = PrefabManager.instans.getprefabByName("Enemy_1_D");
 
                             break;
                     }
