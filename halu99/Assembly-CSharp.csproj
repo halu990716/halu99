@@ -77,7 +77,7 @@
     <Compile Include="Assets\Scripts\ExampleManager.cs" />
     <Compile Include="Assets\FX\Scripts\CFX_AutoDestructShuriken.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
-    <Compile Include="Assets\Scripts\Manager\PrefabManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\PrefabManager\PrefabManager.cs" />
     <Compile Include="Assets\Scripts\MyGizmo.cs" />
     <Compile Include="Assets\Scripts\MissileController.cs" />
     <Compile Include="Assets\Scripts\Ui\SkillUIController.cs" />
@@ -105,6 +105,7 @@
     <Compile Include="Assets\LoginController.cs" />
     <Compile Include="Assets\FX\Scripts\CFXR_Effect.CameraShake.cs" />
     <Compile Include="Assets\Scripts\Ui\ResultNameInput.cs" />
+    <Compile Include="Assets\Scripts\Manager\ObjectPoolManager\ObjectPoolManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\box\JMO Assets\Cartoon FX (legacy)\Shaders\CFX3 Multiply Color.shader" />

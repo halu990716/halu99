@@ -71,7 +71,7 @@ public class EnemyManager : MonoBehaviour
                 {
                     Boss = true;
 
-                    prefab = PrefabManager.instans.getprefabByName("Enemy_2_A");
+                    prefab = ObjectPoolManager.GetInstance.getObject("Enemy_2_A");
                     GameObject Obj = Instantiate(prefab);
 
                     Obj.transform.position = new Vector3(
@@ -94,25 +94,25 @@ public class EnemyManager : MonoBehaviour
                         case Enemy_1_A:
 
                             // ** Enemy로 사용할 원형 객체
-                            prefab = PrefabManager.instans.getprefabByName("Enemy_1_A");
+                            prefab = ObjectPoolManager.GetInstance.getObject("Enemy_1_A");
 
                             break;
 
                         case Enemy_1_B:
 
-                            prefab = PrefabManager.instans.getprefabByName("Enemy_1_B");
+                            prefab = ObjectPoolManager.GetInstance.getObject("Enemy_1_B");
 
                             break;
 
                         case Enemy_1_C:
 
-                            prefab = PrefabManager.instans.getprefabByName("Enemy_1_C");
+                            prefab = ObjectPoolManager.GetInstance.getObject("Enemy_1_C");
 
                             break;
 
                         case Enemy_1_D:
 
-                            prefab = PrefabManager.instans.getprefabByName("Enemy_1_D");
+                            prefab = ObjectPoolManager.GetInstance.getObject("Enemy_1_D");
 
                             break;
                     }
@@ -152,7 +152,7 @@ public class EnemyManager : MonoBehaviour
         if (ControllerManager.GetInstance().BossDie)
         {
             BossAppear.SetActive(false);
-            Destroy(gameObject, 0.016f);
+            gameObject.SetActive(false);
         }
     }
 
@@ -166,5 +166,10 @@ public class EnemyManager : MonoBehaviour
 
             yield return new WaitForSeconds(0.3f);
         }
+    }
+
+    private void OnDisable()
+    {
+        ObjectPoolManager.GetInstance.returnObject(gameObject);
     }
 }

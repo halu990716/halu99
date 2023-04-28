@@ -43,9 +43,9 @@ public class BossController : MonoBehaviour
         Timer = GameObject.Find("Timer");
         parent = GameObject.Find("EnemyList");
 
-        BossMissile = PrefabManager.instans.getprefabByName("BossMissile");
-        Coin = PrefabManager.instans.getprefabByName("Coin");
-
+        BossMissile = ObjectPoolManager.GetInstance.getObject("BossMissile");
+        Coin = ObjectPoolManager.GetInstance.getObject("Coin");
+ 
         Ani = GetComponent<Animator>();
 
         Speed = 15.0f;
@@ -328,7 +328,12 @@ public class BossController : MonoBehaviour
 
             ControllerManager.GetInstance().Coin += 100;
 
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
+    }
+
+    private void OnDisable()
+    {
+        ObjectPoolManager.GetInstance.returnObject(gameObject);
     }
 }

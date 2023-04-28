@@ -63,24 +63,24 @@ public class PlayerController : MonoBehaviour
         // player 의 spriteRenderer 받아온다.
         playerRenderer = this.GetComponent<SpriteRenderer>();
 
-        GuidedMissilePrefab = PrefabManager.instans.getprefabByName("Missile_Hiden");
+        GuidedMissilePrefab = ObjectPoolManager.GetInstance.getObject("Missile_Hiden");
 
         switch (Player_List)
         {
             case Ship_1_A:
-                MissilePrefab = PrefabManager.instans.getprefabByName("Missile_A");
+                MissilePrefab = ObjectPoolManager.GetInstance.getObject("Missile_A");
                 ControllerManager.GetInstance().Player_HP += ControllerManager.GetInstance().player1;
                 print(ControllerManager.GetInstance().player1);
                 break;
 
             case Ship_1_B:
-                MissilePrefab = PrefabManager.instans.getprefabByName("Missile_B");
+                MissilePrefab = ObjectPoolManager.GetInstance.getObject("Missile_B");
                 ControllerManager.GetInstance().SkillCool = 0.1f + (ControllerManager.GetInstance().player2 * 0.2f);
 
                 break;
 
             case Ship_1_C:
-                MissilePrefab = PrefabManager.instans.getprefabByName("Missile_C");
+                MissilePrefab = ObjectPoolManager.GetInstance.getObject("Missile_C");
                 ControllerManager.GetInstance().MaxMissileDamage *= 1 + (ControllerManager.GetInstance().player3 * 0.2f);
                 ControllerManager.GetInstance().MissileDamage += ControllerManager.GetInstance().player3 * 2;
                 ControllerManager.GetInstance().Ship_C = true;
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case Ship_1_D:
-                MissilePrefab = PrefabManager.instans.getprefabByName("Missile_D");
+                MissilePrefab = ObjectPoolManager.GetInstance.getObject("Missile_D");
                 ControllerManager.GetInstance().AttackSpeed -= 0.0f + (ControllerManager.GetInstance().player4 * 0.1f);
 
                 break;
@@ -238,7 +238,7 @@ public class PlayerController : MonoBehaviour
             // ** 진동 효과 컨트롤러 생성.
             camera.AddComponent<CameraController>();
 
-            Destroy(gameObject, 0.016f);
+            gameObject.SetActive(false);
         }
     }
 
@@ -257,5 +257,10 @@ public class PlayerController : MonoBehaviour
         ControllerManager.GetInstance().Player_HP = HP;
 
         StartCoroutine(WaitHIT());
+    }
+
+    private void OnDisable()
+    {
+        ObjectPoolManager.GetInstance.returnObject(gameObject);
     }
 }

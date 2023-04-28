@@ -6,7 +6,7 @@ using UnityEngine;
 public class PrefabManager
 {
     // 인스턴스 생성
-    public static PrefabManager instans { get; } = new PrefabManager();
+    public static PrefabManager GetInstans { get; } = new PrefabManager();
 
     // 데이터 저장소
     private Dictionary<string, GameObject> prototypeObjectList = new Dictionary<string, GameObject>();

@@ -32,8 +32,8 @@ public class EnemyController : MonoBehaviour
     private void Awake()
     {
         Ani = GetComponent<Animator>();
-        Missile = PrefabManager.instans.getprefabByName("Missile");
-        Coin = PrefabManager.instans.getprefabByName("Coin");
+        Missile = ObjectPoolManager.GetInstance.getObject("Missile");
+        Coin = ObjectPoolManager.GetInstance.getObject("Coin");
 
         rand = 1;
         Attack = false;
@@ -136,22 +136,22 @@ public class EnemyController : MonoBehaviour
             switch (rand)
             {
                 case Pickup_1_A:
-                    prefab = Resources.Load("Prefabs/Player/Item/Pickup_1_A") as GameObject;
+                    prefab = ObjectPoolManager.GetInstance.getObject("Pickup_1_A");
 
                     break;
 
                 case Pickup_1_B:
-                    prefab = Resources.Load("Prefabs/Player/Item/Pickup_1_B") as GameObject;
+                    prefab = ObjectPoolManager.GetInstance.getObject("Pickup_1_B");
 
                     break;
 
                 case Pickup_1_C:
-                    prefab = Resources.Load("Prefabs/Player/Item/Pickup_1_C") as GameObject;
+                    prefab = ObjectPoolManager.GetInstance.getObject("Pickup_1_C");
 
                     break;
 
                 case Pickup_1_D:
-                    prefab = Resources.Load("Prefabs/Player/Item/Pickup_1_D") as GameObject;
+                    prefab = ObjectPoolManager.GetInstance.getObject("Pickup_1_D");
 
                     break;
 
@@ -163,7 +163,7 @@ public class EnemyController : MonoBehaviour
                     switch (rand)
                     {
                         case Hiden:
-                            prefab = Resources.Load("Prefabs/Player/Item/Pickup_1_Hiden") as GameObject;
+                            prefab = ObjectPoolManager.GetInstance.getObject("Pickup_1_Hiden");
                             HidenB = false;
 
                             break;
@@ -190,7 +190,7 @@ public class EnemyController : MonoBehaviour
 
             GetComponent<CapsuleCollider2D>().enabled = false;
 
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
     private void OnEnemyAttack()
@@ -200,5 +200,10 @@ public class EnemyController : MonoBehaviour
         Object.transform.position = transform.position;
         Object.transform.parent = Parent.transform;
         Object.transform.name = "EnemyMissile";
+    }
+
+    private void OnDisable()
+    {
+        ObjectPoolManager.GetInstance.returnObject(gameObject);
     }
 }

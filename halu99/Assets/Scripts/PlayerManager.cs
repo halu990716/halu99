@@ -45,25 +45,25 @@ public class PlayerManager : MonoBehaviour
             {
                 case Ship_1_A:
                     // ** Player로 사용할 원형 객체
-                    prefab = PrefabManager.instans.getprefabByName("Ship_1_A");
+                    prefab = ObjectPoolManager.GetInstance.getObject("Ship_1_A");
 
                     break;
 
                 case Ship_1_B:
                     // ** Player로 사용할 원형 객체
-                    prefab = PrefabManager.instans.getprefabByName("Ship_1_B");
+                    prefab = ObjectPoolManager.GetInstance.getObject("Ship_1_B");
 
                     break;
 
                 case Ship_1_C:
                     // ** Player로 사용할 원형 객체
-                    prefab = PrefabManager.instans.getprefabByName("Ship_1_C");
+                    prefab = ObjectPoolManager.GetInstance.getObject("Ship_1_C");
 
                     break;
 
                 case Ship_1_D:
                     // ** Player로 사용할 원형 객체
-                    prefab = PrefabManager.instans.getprefabByName("Ship_1_D");
+                    prefab = ObjectPoolManager.GetInstance.getObject("Ship_1_D");
 
                     break;
             }
